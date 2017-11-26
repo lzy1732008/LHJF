@@ -24,18 +24,18 @@ public class Main {
 	 File[] list = file.listFiles();
 	 try{
 		
-		 for(int j =0 ;j < 100; j++){ 
+		 for(int j =0 ;j < 1000; j++){ 
 			 Document document = reader.read(list[j]);
 			 String fileName = list[j].getName();
-			 System.out.println(list[j].getName()+"order:"+j);
+		//	 System.out.println(list[j].getName()+"order:"+j);
 			// if(!list[j].getName().contains("简易")){
  		//第一部分*******************
 			 //创建新xml    			   
 			    Element newroot0 = DocumentHelper.createElement("write");  
-		        Document documentnew = DocumentHelper.createDocument(newroot0); 
-		        initXML(document,newroot0);    		     
-		        Element newroot = newroot0.addElement("LHJHYSTQ").addAttribute("nameCN", "离婚纠纷要素提取");
-		        YSMETHOD.row5(document,newroot);
+		     //   Document documentnew = DocumentHelper.createDocument(newroot0); 
+		     //   initXML(document,newroot0);    		     
+		     //   Element newroot = newroot0.addElement("LHJHYSTQ").addAttribute("nameCN", "离婚纠纷要素提取");
+		        YSMETHOD.row100(document);
 		 }
 		 
      }catch(Exception e){
