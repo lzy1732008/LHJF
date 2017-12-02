@@ -2,7 +2,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
+import java.util.Iterator;   
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.*;
