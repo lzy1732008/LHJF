@@ -74,6 +74,7 @@ public class YS {
 		int res = 0; 
  	     String content = util.getAJJBQKString(document);
  	     String[] sentence = content.split("。|；");
+ 	    if(content!=null) {
  	   	 for(String s:sentence) {
  	   		 if(s.contains("子")||s.contains("女")||s.contains("男")||s.contains("女")||s.contains("孩")) {
  	   		    res = 1;	   		        
@@ -83,7 +84,8 @@ public class YS {
  	   		        res = 1;
  	   		    }
  	   		  }		  
- 	   	   }	    		    
+ 	   	   }	 
+ 	    }
        return res;  
 	}
 	/*
@@ -165,7 +167,7 @@ public class YS {
 	/*
 	 * 中华人民共和国婚姻法第三十八条
 	 */
-	public static int row100(Document document) {
+	public static int row9(Document document) {
 		int res = 0; 
  	    String content = util.getAJJBQKString(document);
  	    String regex = "。|；|，";
@@ -183,5 +185,134 @@ public class YS {
 	     }	    
  	    return res;
 	}
-
+	/*
+	 * 中华人民共和国婚姻法第三十八条:涉及父母探望子女
+	 */
+	public static int row10(Document document) {
+		int res = 0; 
+ 	     String content = util.getAJJBQKString(document);
+ 	     if(content!=null) {
+ 	     String[] sentence = content.split("。|；");
+ 	   	 for(String s:sentence) {
+ 	   		 if(s.contains("子")||s.contains("女")||s.contains("男")||s.contains("女")||s.contains("孩")) {
+ 	   		    res = 1;	   		        
+ 	   		    String[] ysFlag = {"探望","看望"};
+ 	   		  //  System.out.println(s);
+ 	   		    if(util.ifContainFlag(s, ysFlag)) {
+ 	   		        System.out.println("看望》》》》》》》》》》》》》"+s);
+ 	   		    	res = 1;
+ 	   		    }
+ 	   		  }		  
+ 	   	   }	    
+ 	     }
+       return res;
+	}
+	/*
+	 * 中华人民共和国婚姻法第十八条:一方有伤残补助
+	 */
+	public static int row11_1(Document document) {
+		int res = 0; 
+ 	     String content = util.getAJJBQKString(document);
+ 	     if(content!=null) {
+ 	     String[] sentence = content.split("。|；|，");
+ 	   	 for(String s:sentence) {
+ 	   	     if(s.contains("伤残补助")||s.contains("伤残费")||s.contains("伤残金")) {
+ 	   	    	 System.out.println(s);
+ 	   	     }
+ 	   	   }	    
+ 	     }
+       return res;
+	}
+	/*
+	 * 中华人民共和国婚姻法第十八条：是否有遗嘱或赠与合同中确定只归夫或妻一方的财产
+	 */
+	public static int row11_2(Document document) {
+		int res = 0;
+		String content = util.getAJJBQKString(document);
+		if(content!=null) {
+			 String[] sentence = content.split("。|；|，");
+	 	   	 for(String s:sentence) {
+	 	   	     if(s.contains("遗嘱")||s.contains("赠与")||s.contains("遗赠")) {
+	 	   	    	 System.out.println(s);
+	 	   	    	 if(!s.contains("双方")&&!s.contains("共同")) {
+	 	   	    		 System.out.print("双方"+s);
+	 	   	    		 res = 1;
+	 	   	    	 }
+	 	   	    	 
+	 	   	     }
+	 	   	   }	
+		}
+		return res;
+		
+	}
+	/*
+	 * 中华人民共和国民事诉讼法第十三条:民事诉讼
+	 */
+	public static int row12(Document document) {
+		int res = 0;
+		String content = util.getAJJBQKString(document);
+		if(content!=null) {
+			 String[] sentence = content.split("。|；|，");
+	 	   	 for(String s:sentence) {
+	 	   	     if(s.contains("民事")) {
+	 	   	    	 System.out.println(s);
+	 	   	     }
+	 	   	   }	
+		}
+		return res;
+		
+	}
+	
+	/*
+	 * 中华人民共和国婚姻法第四十一条：夫妻共同生活负债
+	 */
+	public static int row13(Document document) {
+		int res = 0;
+		String content = util.getAJJBQKString(document);
+		if(content!=null) {
+			 String[] sentence = content.split("。|；|，");
+	 	   	 for(String s:sentence) {
+	 	   		 if(s.contains("共同")||s.contains("双方")) {
+	 	   			 String[] ysFlag = {"债务","欠款","负债"};
+	 	   			 if(util.ifContainFlag(s, ysFlag)) {
+                        res = 1;	 	   				 
+	 	   			 }
+	 	   		 }
+	 	   	   }	
+		}
+		return res;
+		
+	}
+	/*
+	 * 中华人民共和国民事诉讼法第一百三十四条：公开审理
+	 */
+	public static int row14(Document document) {
+		int res = 0;
+		String content = util.getAJJBQKString(document);
+		if(content!=null) {
+			 String[] sentence = content.split("。|；|，");
+	 	   	 for(String s:sentence) {
+	 	   		 if(s.contains("公开")&&s.contains("审理")) {
+//	 	   			 String[] ysFlag = {"债务","欠款","负债"};
+//	 	   			 if(util.ifContainFlag(s, ysFlag)) {
+//                        res = 1;	 	   				 
+//	 	   			 }
+	 	   			 System.out.println(s);
+	 	   			 res = 1;
+	 	   		 }
+	 	   	   }	
+		}
+		return res;
+	}	
+    
+	/*
+	 * 中华人民共和国民事诉讼法第一百三十一条:委托外地人民法院调查
+	 */
+	public static int row100(Document document) {
+		int res = 0;
+		
+		return res;
+	}
+	
+	
 }
