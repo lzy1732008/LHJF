@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -22,6 +23,7 @@ public class Main {
 		SAXReader reader = new SAXReader();
 		File file = new File("/users/wenny/Downloads/2013测试");
 		File[] list = file.listFiles();
+		String res = "";
 		System.out.print(list.length);
 		try{
 
@@ -37,11 +39,21 @@ public class Main {
 				//   initXML(document,newroot0);
 				//   Element newroot = newroot0.addElement("LHJHYSTQ").addAttribute("nameCN", "离婚纠纷要素提取");
 				YSMETHOD.row100(document);
+
+
 			}
+			//将结果写入txt文件中
+			FileWriter fw = new FileWriter("res.txt");
+			fw.write(res);
 
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+
+
+
+
+
 	}
 
 	public static void initXML(Document document,Element newroot){//将原文加进去
