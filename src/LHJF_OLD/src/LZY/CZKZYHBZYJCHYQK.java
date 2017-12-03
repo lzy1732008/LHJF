@@ -139,28 +139,28 @@ public class CZKZYHBZYJCHYQK {
     	  Element root = document.getRootElement();
     	  Element SFCZYFHSFDSRYHWQNode = newroot.addElement("SFCZYFHSFDSRYHWQ").addAttribute("nameCN", "是否存在一方或双方当事人有婚外情、与他人同居等情形");
           String JD ="否";
-          int flagq = 0;
-          int flagh = 0;
-          if(root.element("AJJBQK")!=null){
-        	  Element ajjbqkNode = root.element("AJJBQK");
-        	  if(ajjbqkNode.element("CMSSD")!=null){
-        		  Element cmssdNode = ajjbqkNode.element("CMSSD");
-    	          if(cmssdNode.attribute("value")!=null){ 	        	  
-    	        	 String qwStr = cmssdNode.attributeValue("value");
-    	        	 System.out.println(qwStr);
-    	        	 String[] qwStrarray = qwStr.split("，|。");
-    	        	 for(String qw:qwStrarray){   			
-    		        	 if(qw.contains("婚外情")||qw.contains("第三者")||
-    		        		qw.contains("出轨")||qw.contains("同居")||
-    		         		qw.contains("暧昧")||qw.contains("不正当关系")){
-    		        		 JD = "是"; 
-    		        		 break;
-    			         }   			
-    	             }
-    		
-                    }
-    	      	
-      }
+			  int flagq = 0;
+			  int flagh = 0;
+			  if(root.element("AJJBQK")!=null){
+				  Element ajjbqkNode = root.element("AJJBQK");
+				  if(ajjbqkNode.element("CMSSD")!=null){
+					  Element cmssdNode = ajjbqkNode.element("CMSSD");
+					  if(cmssdNode.attribute("value")!=null){
+						  String qwStr = cmssdNode.attributeValue("value");
+						  System.out.println(qwStr);
+						  String[] qwStrarray = qwStr.split("，|。");
+						  for(String qw:qwStrarray){
+							  if(qw.contains("婚外情")||qw.contains("第三者")||
+									  qw.contains("出轨")||qw.contains("同居")||
+									  qw.contains("暧昧")||qw.contains("不正当关系")){
+								  JD = "是";
+								  break;
+							  }
+						  }
+
+					  }
+
+				  }
           }
           SFCZYFHSFDSRYHWQNode.addAttribute("value",JD);
       }

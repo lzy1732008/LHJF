@@ -32,14 +32,14 @@ public class Util {
 		for (String s : sentence) {
 			if (ifContainFlag(s, ysFlag)) {
 				System.out.println(s);
-				if (s.contains("无") || s.contains("没") || s.contains("不") || s.contains("未")) {
-					res = -1;
+			//	if (s.contains("无") || s.contains("没") || s.contains("不") || s.contains("未")) {
+			//		res = -1;
 
-				} else {
+			//	} else {
 					res = 1;
 				}
 			}
-		}
+
 		return res;
 	}
 

@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.regex.*;
 
+import LHJF_OLD.src.LZY.JBSS;
+import LHJF_OLD.src.LZY.TimePro;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
@@ -419,7 +421,7 @@ public class YS {
 	/*
     中华人民共和国婚姻法第三十一条:双方自愿离婚
      */
-	public static int row100(Document document) {
+	public static int row20(Document document) {
 		int res = 0;
 		String content = util.getAJJBQKString(document);
 		if(content!=null) {
@@ -436,7 +438,102 @@ public class YS {
 		return res;
 	}
 
+/*
+中华人民共和国婚姻法第三十二条：与他人同居或重婚（重婚；有配偶者与他人同居）
+ */
+public static  int row21(Document document){
+	int JD =0;
+	int flagq = 0;
+	int flagh = 0;
+	String qwStr = "";
+	qwStr = util.getAJJBQKString(document);
+	if(qwStr!=null && !qwStr.equals("")) {
+		String[] qwStrarray = qwStr.split("，|。");
+		if (qwStrarray != null) {
+			for (String qw : qwStrarray) {
+				if (qw.contains("婚外情") || qw.contains("第三者") ||
+						qw.contains("出轨") || qw.contains("同居") ||
+						qw.contains("暧昧") || qw.contains("不正当关系") || qwStr.contains("重婚")) {
+					JD = 1;
+					System.out.println(qw);
+					break;
+				}
+			}
 
+		}
+	}
+	return JD;
+
+}
+/*
+中华人民共和国婚姻法第三十二条：:家庭暴力（实施家庭暴力、虐待、遗弃家庭成员）
+ */
+
+public static  int row21_2(Document document){
+	int JD =0;
+	String qwStr = "";
+	qwStr = util.getAJJBQKString(document);
+	if(qwStr!=null && !qwStr.equals("")) {
+		String[] qwStrarray = qwStr.split("，|。");
+		if (qwStrarray != null) {
+			for (String qw : qwStrarray) {
+				if(qw.contains("赌博")||qw.contains("吸毒")||qw.contains("酗酒")||qw.contains("恶习")
+						){
+					JD = 1;
+					System.out.println(qw);
+					break;
+				}
+			}
+
+		}
+	}
+	return JD;
+
+}
+/*
+中华人民共和国婚姻法第三十二条：:分居满两年
+ */
+	public static int row21_3(Document document) {
+		int res = 0;
+		System.out.println(document.getName());
+		String content = util.getAJJBQKString(document);
+		if(content!=null) {
+			String[] sentence = content.split("。|；");
+			for(String s:sentence) {
+				if(s.contains("分居")||s.contains("离家出走")){
+					//System.out.println(s);
+					res = 1;
+
+				}
+
+			}
+		}
+
+
+		return res;
+	}
+
+	/*
+	涉及夫妻共同财产
+	 */
+	public static int row100(Document document) {
+		int res = 0;
+		System.out.println(document.getName());
+		String content = util.getAJJBQKString(document);
+		if(content!=null) {
+			String[] sentence = content.split("，|；");
+			for(String s:sentence){
+				if(s.contains("夫妻")&&s.contains("财产")){
+					System.out.println(s);
+				}
+			}
+
+
+		}
+
+
+		return res;
+	}
 
 
 

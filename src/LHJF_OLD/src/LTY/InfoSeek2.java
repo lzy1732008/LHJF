@@ -1,6 +1,6 @@
 package LHJF_OLD.src.LTY;
 
-import LZY.TimePro;
+import LHJF_OLD.src.LZY.TimePro;
 import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.Element;

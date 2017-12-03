@@ -157,7 +157,7 @@ public class TimePro {
 
 	    	    public static String dateFormate(String date){
 	    	    	String newdate ;
-	    	    	newdate = new String(date.replace('年', '-'));
+	    	    	newdate = new String(date.replace("年", "-"));
 //	    	    	date = new String(date.replace('月', '-'));
 //	    	    	date = new String(date.replace('日', '-'));
 //	    	    	date = new String(date.replace('时', ':'));
