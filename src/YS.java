@@ -306,13 +306,139 @@ public class YS {
 	}	
     
 	/*
-	 * 中华人民共和国民事诉讼法第一百三十一条:委托外地人民法院调查
+	 * 中华人民共和国婚姻法：第四十二条，离婚后一方生活困难
 	 */
-	public static int row100(Document document) {
+	public static int row15(Document document) {
 		int res = 0;
-		
+		String content = util.getAJJBQKString(document);
+		if(content!=null) {
+			String[] sentence = content.split("。|；|，");
+			for(String s:sentence) {
+				if(s.contains("原告")||s.contains("被告")) {
+					if (s.contains("生活") ) {
+						//使用滑动窗口
+						String[] keypairs = {"生活；困难","生活;艰难","无法;生活"};
+						if(util.windowForKey(s,keypairs,8)){
+							System.out.println(s);
+						}
+					}
+
+				}
+			}
+		}
 		return res;
 	}
-	
-	
+	/*
+	最高人民法院关于适用中华人民共和国婚姻法若干问题的解释（二）第十条 ；请求返还彩礼
+	 */
+	public static int row16(Document document) {
+		int res = 0;
+		String content = util.getAJJBQKString(document);
+		if(content!=null) {
+			String[] sentence = content.split("。|；|，");
+			for(String s:sentence) {
+				if(s.contains("原告")||s.contains("被告")) {
+					if (s.contains("生活") ) {
+						//使用滑动窗口
+						String[] keypairs = {"生活；困难","生活;艰难","无法;生活"};
+						if(util.windowForKey(s,keypairs,8)){
+							System.out.println(s);
+						}
+					}
+
+				}
+			}
+		}
+		return res;
+	}
+	public static int row17(Document document) {
+		int res = 0;
+		String content = util.getAJJBQKString(document);
+		if(content!=null) {
+			String[] sentence = content.split("。|；");
+			for(String s:sentence) {
+				if(s.contains("彩礼")&&(s.contains("要求")||s.contains("主张")||s.contains("请求"))){
+					System.out.println(s);
+					String[]  ysflag = {"返还","归还"};
+					if(util.ifContainFlag(s,ysflag)){
+						res = 1;
+					}
+
+
+				}
+			}
+		}
+		return res;
+	}
+	/*
+	最高人民法院关于适用中华人民共和国婚姻法若干问题的解释（一）第五条:以夫妻名义共同生活
+	 */
+	public static int row18(Document document) {
+		int res = 0;
+		String content = util.getAJJBQKString(document);
+		if(content!=null) {
+			String[] sentence = content.split("。|；|，");
+			for(String s:sentence) {
+				if(s.contains("生活")&&s.contains("夫妻")&&s.contains("名义")){
+					System.out.println(s);
+
+
+
+				}
+			}
+		}
+		return res;
+	}
+/*
+最高人民法院关于人民法院审理离婚案件处理子女抚养问题的若干具体意见第3条：父方和母方均要求子女随其生活
+ */
+public static int row19(Document document) {
+	int res = 0;
+	String content = util.getAJJBQKString(document);
+	if(content!=null) {
+		String[] sentence = content.split("。|；");
+		for(String s:sentence) {
+			String[] znflag = {"子","女","孩子","儿","男孩","女孩"};
+			if(util.ifContainFlag(s,znflag)){
+				//System.out.println(s);
+				//照顾，抚养，生活，抚育
+				String[] fyflag = {"照顾","抚养","生活"};
+				if(util.ifContainFlag(s,fyflag)){
+					String[] qqflag = {"要求","请求","希望","争议"};
+					//要求、请求、希望、争议
+					if(util.ifContainFlag(s,qqflag)){
+						System.out.println(s);
+					}
+				}
+
+			}
+		}
+	}
+	return res;
+}
+/*
+中华人民共和国婚姻法第三十一条:双方自愿离婚
+ */
+	public static int row100(Document document) {
+		int res = 0;
+		String content = util.getAJJBQKString(document);
+		if(content!=null) {
+			String[] sentence = content.split("。|；|，");
+			for(String s:sentence) {
+				if(s.contains("离婚")){
+				//	System.out.println(s);
+					if((s.contains("自愿")||s.contains("同意"))&&!s.contains("不同意")&&!s.contains("不自愿")){
+						System.out.println(s);
+					}
+				}
+			}
+		}
+		return res;
+	}
+
+
+
+
+
+
 }
