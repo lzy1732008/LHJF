@@ -22,10 +22,14 @@ public class XMLReader {
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder = dbf.newDocumentBuilder();
 		File f = new File(path);
+	//	System.out.println("step1+"+f.getPath());
 		Document doc = builder.parse(f); // 编译xml
+	//	System.out.println("step2+");
 		XPathFactory factory = XPathFactory.newInstance();
 		XPath xpath = factory.newXPath();
+	//	System.out.println("step3+");
 		XPathExpression expr = xpath.compile(x); // x是xml中的节点，例如“YGSCD”
+	//	System.out.println("step4+");
 		NodeList nodes = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);// doc中读取expr节点内容
 		if (nodes.getLength() > 0) {
 			result = nodes.item(0).getNodeValue();// 满足正则的XML中的那段文字复制到result中

@@ -65,7 +65,7 @@ public class HyfjsExtractor {
 		Element root = document.getRootElement();
 		Element DLSHZNNode = newroot.addElement("DLSHZN").addAttribute("nameCN", "不能独立生活的子女");
 		String nodepath="//QW//AJJBQK/@value";
-		String ajjbqk = XMLReader.getXMLNode(nodepath, nodepath);
+		String ajjbqk = XMLReader.getXMLNode(path, nodepath);
 		boolean flag = false;
 		if(!StringUtil.isBlank(ajjbqk)){
 			List<String> ajjbqkList = SplitUtil.getWholeContent(ajjbqk);
@@ -109,7 +109,7 @@ public class HyfjsExtractor {
 		Element root = document.getRootElement();
 		Element node = newroot.addElement("SJFW").addAttribute("nameCN", "涉及房屋");
 		String nodepath="//QW//AJJBQK/@value";
-		String ajjbqk = XMLReader.getXMLNode(nodepath, nodepath);
+		String ajjbqk = XMLReader.getXMLNode(path, nodepath);
 		boolean flag = false;
 		String[] words = {"房屋","住房","房子"};
 		if(!StringUtil.isBlank(ajjbqk) && SplitUtil.containsAll(ajjbqk, words)){
@@ -127,7 +127,7 @@ public class HyfjsExtractor {
 		Element root = document.getRootElement();
 		Element node = newroot.addElement("FQJHXFY").addAttribute("nameCN", "涉及夫妻间互相抚养");
 		String nodepath="//QW//AJJBQK/@value";
-		String ajjbqk = XMLReader.getXMLNode(nodepath, nodepath);
+		String ajjbqk = XMLReader.getXMLNode(path, nodepath);
 		boolean flag = false;
 		if(!StringUtil.isBlank(ajjbqk)){
 			List<String> ajjbqkList = SplitUtil.getWholeContent(ajjbqk);
@@ -154,7 +154,7 @@ public class HyfjsExtractor {
 		Element root = document.getRootElement();
 		Element node = newroot.addElement("JHDJ").addAttribute("nameCN", "已结婚登记");
 		String nodepath="//QW//AJJBQK/@value";
-		String ajjbqk = XMLReader.getXMLNode(nodepath, nodepath);
+		String ajjbqk = XMLReader.getXMLNode(path, nodepath);
 		String[] wordsKey = {"结婚证","登记结婚"};
 		if(!StringUtil.isBlank(ajjbqk)&&(StringUtil.contains(ajjbqk, "结婚证")||StringUtil.contains(ajjbqk, "登记结婚"))){
 			node.addAttribute("value", "1");
@@ -173,7 +173,7 @@ public class HyfjsExtractor {
 		Element root = document.getRootElement();
 		Element node = newroot.addElement("ZNYLF").addAttribute("nameCN", "子女医疗费用");
 		String nodepath="//QW//AJJBQK//YGSCD/@value";
-		String ajjbqk = XMLReader.getXMLNode(nodepath, nodepath);
+		String ajjbqk = XMLReader.getXMLNode(path, nodepath);
 		String[] wordsKey1 = {"子女","儿子","婚生子","女儿","婚生女","孩子","儿女"};
 		String[] wordsKey = {"生活费","教育费","医疗费","抚养费"};
 		boolean flag = false;
@@ -201,7 +201,7 @@ public class HyfjsExtractor {
 		Element root = document.getRootElement();
 		Element node = newroot.addElement("HYMFRS").addAttribute("nameCN", "女方是否怀孕或分娩后一年内或中止妊娠后六个月");
 		String nodepath="//QW//CPFXGC/@value";
-		String cpfxgc = XMLReader.getXMLNode(nodepath, nodepath);
+		String cpfxgc = XMLReader.getXMLNode(path, nodepath);
 		if(!StringUtil.isBlank(cpfxgc)){
 			String[] words = {"妊娠","分娩","哺乳期","怀孕"};
 			if(SplitUtil.containsAll(cpfxgc, words)){
@@ -221,7 +221,7 @@ public class HyfjsExtractor {
 		Element root = document.getRootElement();
 		Element node = newroot.addElement("CCYD").addAttribute("nameCN", "有关财产书面约定");
 		String nodepath="//QW//CPFXGC/@value";
-		String cpfxgc = XMLReader.getXMLNode(nodepath, nodepath);
+		String cpfxgc = XMLReader.getXMLNode(path, nodepath);
 		if(!StringUtil.isBlank(cpfxgc)){
 			String[] words = {"约定","协议"};
 			if(SplitUtil.containsAll(cpfxgc, words)){
@@ -241,7 +241,7 @@ public class HyfjsExtractor {
 		Element root = document.getRootElement();
 		Element node = newroot.addElement("ZYCC").addAttribute("nameCN", "是否存在转移财产等行为");
 		String nodepath="//QW//CPFXGC/@value";
-		String cpfxgc = XMLReader.getXMLNode(nodepath, nodepath);
+		String cpfxgc = XMLReader.getXMLNode(path, nodepath);
 		boolean flag = false;
 		if(!StringUtil.isBlank(cpfxgc)){
 			List<String> cpfxgcList = SplitUtil.getWholeContent(cpfxgc);
@@ -266,9 +266,9 @@ public class HyfjsExtractor {
 	 */
 	public static void hywx(String path,Document document,Element newroot) throws XPathExpressionException, ParserConfigurationException, SAXException, IOException{
 		Element root = document.getRootElement();
-		Element node = newroot.addElement("ZYCC").addAttribute("nameCN", "是否属于无效婚姻");
+		Element node = newroot.addElement("HYWX").addAttribute("nameCN", "是否属于无效婚姻");
 		String nodepath="//QW//CPFXGC/@value";
-		String cpfxgc = XMLReader.getXMLNode(nodepath, nodepath);
+		String cpfxgc = XMLReader.getXMLNode(path, nodepath);
 		boolean flag = false;
 		if(!StringUtil.isBlank(cpfxgc)){
 			List<String> cpfxgcList = SplitUtil.getWholeContent(cpfxgc);
@@ -276,6 +276,7 @@ public class HyfjsExtractor {
 			for(String s:cpfxgcList){
 				if(SplitUtil.containsAll(s, sicknessWords)||StringUtil.contains(s, "旁系血亲")||StringUtil.contains(s, "婚姻无效")){
 					flag = true;
+					break;
 				}
 			}
 		}
@@ -291,9 +292,9 @@ public class HyfjsExtractor {
 	 */
 	public static void gthd(String path,Document document,Element newroot) throws XPathExpressionException, ParserConfigurationException, SAXException, IOException{
 		Element root = document.getRootElement();
-		Element node = newroot.addElement("ZYCC").addAttribute("nameCN", "是否属于无效婚姻");
+		Element node = newroot.addElement("GTGD").addAttribute("nameCN", "是否属于无效婚姻");
 		String nodepath="//QW//CPFXGC/@value";
-		String cpfxgc = XMLReader.getXMLNode(nodepath, nodepath);
+		String cpfxgc = XMLReader.getXMLNode(path, nodepath);
 		boolean flag = false;
 		if(!StringUtil.isBlank(cpfxgc)){
 			List<String> cpfxgcList = SplitUtil.getWholeContent(cpfxgc);
@@ -301,6 +302,7 @@ public class HyfjsExtractor {
 			for(String s:cpfxgcList){
 				if(SplitUtil.containsAll(s, keyWord)&&StringUtil.contains(s, "共同")){
 					flag = true;
+					break;
 				}
 			}
 		}

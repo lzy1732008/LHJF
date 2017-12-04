@@ -19,13 +19,15 @@ public class YS {
 		if(docele!=null) {
 			if(docele.attribute("value")!=null) {
 				String content = docele.attributeValue("value");
-				String[] sentence = content.split("。|；");
-				for(String s:sentence) {
-					if(s.contains("被告")&&(s.contains("退庭")||s.contains("不到庭")||s.contains("未到庭"))) {
-						res = 1;
+				if(content!=null&&!content.equals("")) {
+					String[] sentence = content.split("。|；");
+					for (String s : sentence) {
+						if (s.contains("被告") && (s.contains("退庭") || s.contains("不到庭") || s.contains("未到庭"))) {
+							res = 1;
+							break;
+						}
 					}
 				}
-
 			}
 		}
 		SFBGJBDTHZTTTNode.addAttribute("value",res+"");
@@ -44,11 +46,14 @@ public class YS {
 		if(docele!=null) {
 			if(docele.attribute("value")!=null) {
 				String content = docele.attributeValue("value");
-				String[] sentence = content.split("。|；");
-				for(String s:sentence) {
-					if(s.contains("原告")&&s.contains("撤")&&s.contains("诉")) {
-						res = 1;
-						System.out.println(s);
+				if(content!=null&&!content.equals("")) {
+					String[] sentence = content.split("。|；");
+					for (String s : sentence) {
+						if (s.contains("原告") && s.contains("撤") && s.contains("诉")) {
+							res = 1;
+							break;
+							//System.out.println(s);
+						}
 					}
 				}
 
@@ -65,8 +70,9 @@ public class YS {
 
 		int res = 0;
 		String content = util.getAJJBQKString(document);
-		String[] sentence = content.split("。|；");
-		if(content!=null) {
+
+		if(content!=null&&!content.equals("")) {
+			String[] sentence = content.split("。|；");
 			for(String s:sentence) {
 				if(s.contains("子")||s.contains("女")||s.contains("男")||s.contains("女")||s.contains("孩")) {
 					res = 1;
@@ -74,6 +80,7 @@ public class YS {
 					System.out.println(s);
 					if(util.ifContainFlag(s, ysFlag)) {
 						res = 1;
+						break;
 					}
 				}
 			}
@@ -89,14 +96,17 @@ public class YS {
 
 		int res = 0;
 		String content = util.getAJJBQKString(document);
-		String[] sentence = content.split("。|；");
-		for(String s:sentence) {
-			if(s.contains("子")||s.contains("女")||s.contains("男")||s.contains("女")||s.contains("孩")) {
-				res = 1;
-				String[] ysFlag = {"生活费","抚养费","学费","教育费"};
-				System.out.println(s);
-				if(util.ifContainFlag(s, ysFlag)) {
+		if(content!=null&&!content.equals("")) {
+			String[] sentence = content.split("。|；");
+			for (String s : sentence) {
+				if (s.contains("子") || s.contains("女") || s.contains("男") || s.contains("女") || s.contains("孩")) {
 					res = 1;
+					String[] ysFlag = {"生活费", "抚养费", "学费", "教育费"};
+					System.out.println(s);
+					if (util.ifContainFlag(s, ysFlag)) {
+						res = 1;
+						break;
+					}
 				}
 			}
 		}
@@ -111,7 +121,7 @@ public class YS {
 
 		int res = 0;
 		String content = util.getAJJBQKString(document);
-		if(content!=null) {
+		if(content!=null&&!content.equals("")) {
 			String regex = "。|；";
 			String[] ysFlag = {"哺乳期","襁褓"};
 			util.ifContainYS(content, ysFlag, regex);
@@ -126,7 +136,7 @@ public class YS {
 		Element SFBGJBDTHZTTTNode = newroot.addElement("ZJ").addAttribute("nameCN", "证据");
 		int res = 0;
 		String content = util.getAJJBQKString(document);
-		if(content!=null) {
+		if(content!=null&&!content.equals("")) {
 			String regex = "。|；|，";
 			String[] sentence = content.split(regex);
 			for(String s:sentence) {
@@ -134,7 +144,8 @@ public class YS {
 					System.out.println("证据："+s);
 					if(s.contains("提供")||s.contains("收集")||s.contains("调查")) {
 						res =1;
-						System.out.println("证据22："+s);
+						break;
+						//System.out.println("证据22："+s);
 					}
 				}
 			}
@@ -151,14 +162,15 @@ public class YS {
 		int res = 0;
 		String content = util.getAJJBQKString(document);
 		String regex = "。|；|，";
-		if(content!=null) {
+		if(content!=null&&!content.equals("")) {
 			String[] sentence = content.split(regex);
 			for(String s:sentence) {
 				if(s.contains("简单")||s.contains("简易")) {
 					System.out.println("简单："+s);
 					if(s.contains("民事案件")||s.contains("程序")) {
 						res =1;
-						System.out.println("民事案件："+s);
+						//System.out.println("民事案件："+s);
+						break;
 					}
 				}
 			}
@@ -175,7 +187,7 @@ public class YS {
 		Element SFBGJBDTHZTTTNode = newroot.addElement("SJFMTWZN").addAttribute("nameCN", "涉及父母探望子女");
 		int res = 0;
 		String content = util.getAJJBQKString(document);
-		if(content!=null) {
+		if(content!=null&&!content.equals("")) {
 			String[] sentence = content.split("。|；");
 			for(String s:sentence) {
 				if(s.contains("子")||s.contains("女")||s.contains("男")||s.contains("女")||s.contains("孩")) {
@@ -185,6 +197,7 @@ public class YS {
 					if(util.ifContainFlag(s, ysFlag)) {
 						System.out.println("看望》》》》》》》》》》》》》"+s);
 						res = 1;
+						break;
 					}
 				}
 			}
@@ -199,11 +212,13 @@ public class YS {
 		Element SFBGJBDTHZTTTNode = newroot.addElement("YFYSCBZ").addAttribute("nameCN", "一方有伤残补助");
 		int res = 0;
 		String content = util.getAJJBQKString(document);
-		if(content!=null) {
+		if(content!=null&&!content.equals("")) {
 			String[] sentence = content.split("。|；|，");
 			for(String s:sentence) {
 				if(s.contains("伤残补助")||s.contains("伤残费")||s.contains("伤残金")) {
-					System.out.println(s);
+					//System.out.println(s);
+					res = 1;
+					break;
 				}
 			}
 		}
@@ -217,14 +232,15 @@ public class YS {
 		Element SFBGJBDTHZTTTNode = newroot.addElement("SFYYZHZYHTZQDZGFHQYFDCC").addAttribute("nameCN", "是否有遗嘱或赠与合同中确定只归夫或妻一方的财产");
 		int res = 0;
 		String content = util.getAJJBQKString(document);
-		if(content!=null) {
+		if(content!=null&&!content.equals("")) {
 			String[] sentence = content.split("。|；|，");
 			for(String s:sentence) {
 				if(s.contains("遗嘱")||s.contains("赠与")||s.contains("遗赠")) {
 					System.out.println(s);
 					if(!s.contains("双方")&&!s.contains("共同")) {
-						System.out.print("双方"+s);
+						//System.out.print("双方"+s);
 						res = 1;
+						break;
 					}
 
 				}
@@ -242,11 +258,12 @@ public class YS {
 
 		int res = 0;
 		String content = util.getAJJBQKString(document);
-		if(content!=null) {
+		if(content!=null&&!content.equals("")) {
 			String[] sentence = content.split("。|；|，");
 			for(String s:sentence) {
 				if(s.contains("民事")) {
-					System.out.println(s);
+					res = 1;
+					break;
 				}
 			}
 		}
@@ -262,13 +279,14 @@ public class YS {
 		Element SFBGJBDTHZTTTNode = newroot.addElement("FQGTSHFZ").addAttribute("nameCN", "夫妻共同生活负债");
 		int res = 0;
 		String content = util.getAJJBQKString(document);
-		if(content!=null) {
+		if(content!=null&&!content.equals("")) {
 			String[] sentence = content.split("。|；|，");
 			for(String s:sentence) {
 				if(s.contains("共同")||s.contains("双方")) {
 					String[] ysFlag = {"债务","欠款","负债"};
 					if(util.ifContainFlag(s, ysFlag)) {
 						res = 1;
+						break;
 					}
 				}
 			}
@@ -284,7 +302,7 @@ public class YS {
 		Element SFBGJBDTHZTTTNode = newroot.addElement("GKSL").addAttribute("nameCN", "公开审理");
 		int res = 0;
 		String content = util.getAJJBQKString(document);
-		if(content!=null) {
+		if(content!=null&&!content.equals("")) {
 			String[] sentence = content.split("。|；|，");
 			for(String s:sentence) {
 				if(s.contains("公开")&&s.contains("审理")) {
@@ -292,8 +310,9 @@ public class YS {
 //	 	   			 if(util.ifContainFlag(s, ysFlag)) {
 //                        res = 1;
 //	 	   			 }
-					System.out.println(s);
+					//System.out.println(s);
 					res = 1;
+					break;
 				}
 			}
 		}
@@ -308,7 +327,7 @@ public class YS {
 		Element SFBGJBDTHZTTTNode = newroot.addElement("LHHYFSHKN").addAttribute("nameCN", "离婚后一方生活困难");
 		int res = 0;
 		String content = util.getAJJBQKString(document);
-		if(content!=null) {
+		if(content!=null&&!content.equals("")) {
 			String[] sentence = content.split("。|；|，");
 			for(String s:sentence) {
 				if(s.contains("原告")||s.contains("被告")) {
@@ -316,7 +335,8 @@ public class YS {
 						//使用滑动窗口
 						String[] keypairs = {"生活;困难","生活;艰难","无法;生活"};
 						if(util.windowForKey(s,keypairs,8)){
-							System.out.println(s);
+							res = 1;
+							break;
 						}
 					}
 
@@ -331,7 +351,7 @@ public class YS {
 		Element SFBGJBDTHZTTTNode = newroot.addElement("QQFHCL").addAttribute("nameCN", "请求返还彩礼");
 		int res = 0;
 		String content = util.getAJJBQKString(document);
-		if(content!=null) {
+		if(content!=null&&!content.equals("")) {
 			String[] sentence = content.split("。|；");
 			for(String s:sentence) {
 				if(s.contains("彩礼")&&(s.contains("要求")||s.contains("主张")||s.contains("请求"))){
@@ -339,6 +359,7 @@ public class YS {
 					String[]  ysflag = {"返还","归还"};
 					if(util.ifContainFlag(s,ysflag)){
 						res = 1;
+						break;
 					}
 
 
@@ -355,11 +376,12 @@ public class YS {
 		Element SFBGJBDTHZTTTNode = newroot.addElement("YFQMYGTSH").addAttribute("nameCN", "以夫妻名义共同生活");
 		int res = 0;
 		String content = util.getAJJBQKString(document);
-		if(content!=null) {
+		if(content!=null&&!content.equals("")) {
 			String[] sentence = content.split("。|；|，");
 			for(String s:sentence) {
 				if(s.contains("生活")&&s.contains("夫妻")&&s.contains("名义")){
-					System.out.println(s);
+					res = 1;
+					break;
 
 
 
@@ -376,7 +398,7 @@ public class YS {
 		Element SFBGJBDTHZTTTNode = newroot.addElement("FFHMFJYQZNSQSH").addAttribute("nameCN", "父方和母方均要求子女随其生活");
 		int res = 0;
 		String content = util.getAJJBQKString(document);
-		if(content!=null) {
+		if(content!=null&&!content.equals("")) {
 			String[] sentence = content.split("。|；");
 			for(String s:sentence) {
 				String[] znflag = {"子","女","孩子","儿","男孩","女孩"};
@@ -388,7 +410,9 @@ public class YS {
 						String[] qqflag = {"要求","请求","希望","争议"};
 						//要求、请求、希望、争议
 						if(util.ifContainFlag(s,qqflag)){
-							System.out.println(s);
+							//System.out.println(s);
+							res = 1;
+							break;
 						}
 					}
 
@@ -405,13 +429,15 @@ public class YS {
 		Element SFBGJBDTHZTTTNode = newroot.addElement("SFZYLH").addAttribute("nameCN", "双方自愿离婚");
 		int res = 0;
 		String content = util.getAJJBQKString(document);
-		if(content!=null) {
+		if(content!=null&&!content.equals("")) {
 			String[] sentence = content.split("。|；|，");
 			for(String s:sentence) {
 				if(s.contains("离婚")){
 					//	System.out.println(s);
 					if((s.contains("自愿")||s.contains("同意"))&&!s.contains("不同意")&&!s.contains("不自愿")){
-						System.out.println(s);
+						//System.out.println(s);
+						res = 1;
+						break;
 					}
 				}
 			}
@@ -439,7 +465,7 @@ public static  int row19(Document document,Element newroot){
 						qw.contains("出轨") || qw.contains("同居") ||
 						qw.contains("暧昧") || qw.contains("不正当关系") || qwStr.contains("重婚")) {
 					JD = 1;
-					System.out.println(qw);
+					//System.out.println(qw);
 					break;
 				}
 			}
@@ -466,7 +492,7 @@ public static  int row20(Document document,Element newroot){
 				if(qw.contains("赌博")||qw.contains("吸毒")||qw.contains("酗酒")||qw.contains("恶习")
 						){
 					JD = 1;
-					System.out.println(qw);
+					//System.out.println(qw);
 					break;
 				}
 			}
@@ -485,13 +511,13 @@ public static  int row20(Document document,Element newroot){
 		int res = 0;
 		System.out.println(document.getName());
 		String content = util.getAJJBQKString(document);
-		if(content!=null) {
+		if(content!=null&&!content.equals("")) {
 			String[] sentence = content.split("。|；");
 			for(String s:sentence) {
 				if(s.contains("分居")||s.contains("离家出走")){
 					//System.out.println(s);
 					res = 1;
-
+					break;
 				}
 
 			}
@@ -509,11 +535,13 @@ public static  int row20(Document document,Element newroot){
 		int res = 0;
 		System.out.println(document.getName());
 		String content = util.getAJJBQKString(document);
-		if(content!=null) {
+		if(content!=null&&!content.equals("")) {
 			String[] sentence = content.split("，|；|。");
 			for(String s:sentence){
 				if(s.contains("夫妻")&&s.contains("财产")){
-					System.out.println(s);
+				//	System.out.println(s);
+					res = 1;
+					break;
 				}
 			}
 
@@ -543,16 +571,19 @@ public static void row23(Document document, Element newroot){
 			if(cmssdNode.attribute("value")!=null){
 
 				String qwStr = cmssdNode.attributeValue("value");
-				System.out.println(qwStr);
-				String[] qwStrarray = qwStr.split("，|。|；");
-				for(String qw:qwStrarray){
-					if(( qw.contains("殴打")||qw.contains("虐待")|| qw.contains("暴力")||
-							qw.contains("抛弃")||qw.contains("遗弃")||qw.contains("动手"))){
-						fnull = 1;
-						if(( qw.contains("殴打")||qw.contains("虐待")|| qw.contains("暴力")||
-								qw.contains("抛弃")||qw.contains("遗弃")||qw.contains("动手"))&&
-								(!qw.contains("并未")||!qw.contains("没有")||!qw.contains("从未"))){
-							JD = "1";
+				//System.out.println(qwStr);
+				if(qwStr!=null&&!qwStr.equals("")) {
+					String[] qwStrarray = qwStr.split("，|。|；");
+					for (String qw : qwStrarray) {
+						if ((qw.contains("殴打") || qw.contains("虐待") || qw.contains("暴力") ||
+								qw.contains("抛弃") || qw.contains("遗弃") || qw.contains("动手"))) {
+							fnull = 1;
+							if ((qw.contains("殴打") || qw.contains("虐待") || qw.contains("暴力") ||
+									qw.contains("抛弃") || qw.contains("遗弃") || qw.contains("动手")) &&
+									(!qw.contains("并未") || !qw.contains("没有") || !qw.contains("从未"))) {
+								JD = "1";
+								break;
+							}
 						}
 					}
 				}
@@ -573,13 +604,13 @@ public static int row24(Document document,Element newroot) {
 	int res = 0;
 	System.out.println(document.getName());
 	String content = util.getAJJBQKString(document);
-	if(content!=null) {
+	if(content!=null&&!content.equals("")) {
 		String[] sentence = content.split("；|。");
 		for(String s:sentence) {
 			if ((s.contains("婚生") || s.contains("原、被告") || s.contains("双方")) && (s.contains("子") || s.contains("女") || s.contains("孩子") || s.contains("男孩"))) {
 				System.out.println("all" + s);
 				if ((s.contains("两周岁") || s.contains("两岁") || s.contains("2周岁") || s.contains("2岁")) && (s.contains("未满") && s.contains("不满") || s.contains("不足") || s.contains("未足") || s.contains("以下"))) {
-					System.out.println(s);
+					//System.out.println(s);
 					res = 1;
 					break;
 				}
@@ -593,19 +624,19 @@ public static int row24(Document document,Element newroot) {
 离婚前子女是否随祖父母生活
  */
 public static int row25(Document document,Element newroot) {
-	Element SFBGJBDTHZTTTNode = newroot.addElement("YLZSYXZN").addAttribute("nameCN", "有2周岁一下子女");
+	Element SFBGJBDTHZTTTNode = newroot.addElement("LHQZNSFSZFMSH").addAttribute("nameCN", "离婚前子女是否随祖父母生活");
 	int res = 0;
 	System.out.println(document.getName());
 	String content = util.getAJJBQKString(document);
-	if(content!=null) {
+	if(content!=null&&!content.equals("")) {
 		String[] sentence = content.split("；|。");
 		for(String s:sentence) {
 			if((s.contains("祖母")||s.contains("祖父")||s.contains("爷爷")||
 					s.contains("奶奶")||s.contains("外公")||s.contains("外婆"))&&(s.contains("生活")||s.contains("居住")||s.contains("抚养")||
 					s.contains("成长"))) {
-				System.out.println(s);
+			//	System.out.println(s);
 				res = 1;
-
+				break;
 
 			}
 		}
