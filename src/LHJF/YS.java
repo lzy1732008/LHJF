@@ -2,27 +2,26 @@ package LHJF;
 
 import org.dom4j.Document;
 import org.dom4j.Element;
-import sun.jvm.hotspot.debugger.posix.elf.ELFException;
 
 public class YS {
-	private static Util util= new Util();
+	private static Util util = new Util();
 	/*
-	 * row3:±»¸æ¾Ü²»µ½Í¥»òÖĞÍ¾ÍËÍ¥
+	 * row3:è¢«å‘Šæ‹’ä¸åˆ°åº­æˆ–ä¸­é€”é€€åº­
 	 */
 
-	public static int  row1(Document document,Element newroot) {
+	public static int row1(Document document, Element newroot) {
 		Element root = document.getRootElement();
-		Element SFBGJBDTHZTTTNode = newroot.addElement("SFBGJBDTHZTTT").addAttribute("nameCN", "ÊÇ·ñ±»¸æ¾Ü²»µ½Í¥»òÖĞÍ¾ÍËÍ¥");
+		Element SFBGJBDTHZTTTNode = newroot.addElement("SFBGJBDTHZTTT").addAttribute("nameCN", "æ˜¯å¦è¢«å‘Šæ‹’ä¸åˆ°åº­æˆ–ä¸­é€”é€€åº­");
 		int res = 0;
 
 		Element docele = root.element("QW");
-		if(docele!=null) {
-			if(docele.attribute("value")!=null) {
+		if (docele != null) {
+			if (docele.attribute("value") != null) {
 				String content = docele.attributeValue("value");
-				if(content!=null&&!content.equals("")) {
-					String[] sentence = content.split("¡£|£»");
+				if (content != null && !content.equals("")) {
+					String[] sentence = content.split("ã€‚|ï¼›");
 					for (String s : sentence) {
-						if (s.contains("±»¸æ") && (s.contains("ÍËÍ¥") || s.contains("²»µ½Í¥") || s.contains("Î´µ½Í¥"))) {
+						if (s.contains("è¢«å‘Š") && (s.contains("é€€åº­") || s.contains("ä¸åˆ°åº­") || s.contains("æœªåˆ°åº­"))) {
 							res = 1;
 							break;
 						}
@@ -30,26 +29,27 @@ public class YS {
 				}
 			}
 		}
-		SFBGJBDTHZTTTNode.addAttribute("value",res+"");
+		SFBGJBDTHZTTTNode.addAttribute("value", res + "");
 		return res;
 	}
+
 	/*
-	 * ĞûÅĞÇ°Ô­¸æÉêÇë³·Ëß
+	 * å®£åˆ¤å‰åŸå‘Šç”³è¯·æ’¤è¯‰
 	 */
-	public static int  row2(Document document,Element newroot) {
+	public static int row2(Document document, Element newroot) {
 		Element root = document.getRootElement();
-		Element SFBGJBDTHZTTTNode = newroot.addElement("YGSQCS").addAttribute("nameCN", "Ô­¸æÉêÇë³·Ëß");
+		Element SFBGJBDTHZTTTNode = newroot.addElement("YGSQCS").addAttribute("nameCN", "åŸå‘Šç”³è¯·æ’¤è¯‰");
 
 		int res = 0;
 
 		Element docele = root.element("QW");
-		if(docele!=null) {
-			if(docele.attribute("value")!=null) {
+		if (docele != null) {
+			if (docele.attribute("value") != null) {
 				String content = docele.attributeValue("value");
-				if(content!=null&&!content.equals("")) {
-					String[] sentence = content.split("¡£|£»");
+				if (content != null && !content.equals("")) {
+					String[] sentence = content.split("ã€‚|ï¼›");
 					for (String s : sentence) {
-						if (s.contains("Ô­¸æ") && s.contains("³·") && s.contains("Ëß")) {
+						if (s.contains("åŸå‘Š") && s.contains("æ’¤") && s.contains("è¯‰")) {
 							res = 1;
 							break;
 							//System.out.println(s);
@@ -59,49 +59,25 @@ public class YS {
 
 			}
 		}
-		SFBGJBDTHZTTTNode.addAttribute("value",res+"");
+		SFBGJBDTHZTTTNode.addAttribute("value", res + "");
 		return res;
 	}
+
 	/*
-	 * Éæ¼°×ÓÅ®¸§Ñø½ÌÓı
+	 * æ¶‰åŠå­å¥³æŠšå…»æ•™è‚²
 	 */
-	public static int  row3(Document document,Element newroot) {
-		Element SFBGJBDTHZTTTNode = newroot.addElement("SJZNFYJY").addAttribute("nameCN", "Éæ¼°×ÓÅ®¸§Ñø½ÌÓı");
+	public static int row3(Document document, Element newroot) {
+		Element SFBGJBDTHZTTTNode = newroot.addElement("SJZNFYJY").addAttribute("nameCN", "æ¶‰åŠå­å¥³æŠšå…»æ•™è‚²");
 
 		int res = 0;
 		String content = util.getAJJBQKString(document);
 
-		if(content!=null&&!content.equals("")) {
-			String[] sentence = content.split("¡£|£»");
-			for(String s:sentence) {
-				if(s.contains("×Ó")||s.contains("Å®")||s.contains("ÄĞ")||s.contains("Å®")||s.contains("º¢")) {
-					res = 1;
-					String[] ysFlag = {"½ÌÓı","¸§Ñø","Ñ§Òµ"};
-					System.out.println(s);
-					if(util.ifContainFlag(s, ysFlag)) {
-						res = 1;
-						break;
-					}
-				}
-			}
-		}
-		SFBGJBDTHZTTTNode.addAttribute("value",res+"");
-		return res;
-	}
-	/*
-	 * Éæ¼°×ÓÅ®Éú»î·Ñ¡¢½ÌÓı·Ñ
-	 */
-	public static int  row4(Document document,Element newroot) {
-		Element SFBGJBDTHZTTTNode = newroot.addElement("SJZNSHFJYF").addAttribute("nameCN", "Éæ¼°×ÓÅ®Éú»î·Ñ¡¢½ÌÓı·Ñ");
-
-		int res = 0;
-		String content = util.getAJJBQKString(document);
-		if(content!=null&&!content.equals("")) {
-			String[] sentence = content.split("¡£|£»");
+		if (content != null && !content.equals("")) {
+			String[] sentence = content.split("ã€‚|ï¼›");
 			for (String s : sentence) {
-				if (s.contains("×Ó") || s.contains("Å®") || s.contains("ÄĞ") || s.contains("Å®") || s.contains("º¢")) {
+				if (s.contains("å­") || s.contains("å¥³") || s.contains("ç”·") || s.contains("å¥³") || s.contains("å­©")) {
 					res = 1;
-					String[] ysFlag = {"Éú»î·Ñ", "¸§Ñø·Ñ", "Ñ§·Ñ", "½ÌÓı·Ñ"};
+					String[] ysFlag = {"æ•™è‚²", "æŠšå…»", "å­¦ä¸š"};
 					System.out.println(s);
 					if (util.ifContainFlag(s, ysFlag)) {
 						res = 1;
@@ -110,135 +86,165 @@ public class YS {
 				}
 			}
 		}
-		SFBGJBDTHZTTTNode.addAttribute("value",res+"");
-		return res;
-	}
-	/*
-	 * ÓĞ²¸ÈéÆÚ×ÓÅ®
-	 */
-	public static int row5(Document document,Element newroot) {
-		Element SFBGJBDTHZTTTNode = newroot.addElement("YBRQZN").addAttribute("nameCN", "ÓĞ²¸ÈéÆÚ×ÓÅ®");
-
-		int res = 0;
-		String content = util.getAJJBQKString(document);
-		if(content!=null&&!content.equals("")) {
-			String regex = "¡£|£»";
-			String[] ysFlag = {"²¸ÈéÆÚ","ñßñÙ"};
-			util.ifContainYS(content, ysFlag, regex);
-		}
-		SFBGJBDTHZTTTNode.addAttribute("value",res+"");
-		return res;
-	}
-	/*
-	 * ÖĞ»ªÈËÃñ¹²ºÍ¹úÃñÊÂËßËÏ·¨µÚÁùÊ®ËÄÌõ£ºÖ¤¾İ
-	 */
-	public static int row6(Document document,Element newroot) {
-		Element SFBGJBDTHZTTTNode = newroot.addElement("ZJ").addAttribute("nameCN", "Ö¤¾İ");
-		int res = 0;
-		String content = util.getAJJBQKString(document);
-		if(content!=null&&!content.equals("")) {
-			String regex = "¡£|£»|£¬";
-			String[] sentence = content.split(regex);
-			for(String s:sentence) {
-				if(s.contains("Ö¤¾İ")) {
-					System.out.println("Ö¤¾İ£º"+s);
-					if(s.contains("Ìá¹©")||s.contains("ÊÕ¼¯")||s.contains("µ÷²é")) {
-						res =1;
-						break;
-						//System.out.println("Ö¤¾İ22£º"+s);
-					}
-				}
-			}
-		}
-		SFBGJBDTHZTTTNode.addAttribute("value",res+"");
+		SFBGJBDTHZTTTNode.addAttribute("value", res + "");
 		return res;
 	}
 
 	/*
-	 * ÖĞ»ªÈËÃñ¹²ºÍ¹úÃñÊÂËßËÏ·¨µÚÒ»°ÙËÄÊ®¶şÌõ:µÚÒ»°ÙËÄÊ®¶şÌõ »ù²ãÈËÃñ·¨ÔººÍËüÅÉ³öµÄ·¨Í¥ÉóÀíÊÂÊµÇå³ş¡¢È¨ÀûÒåÎñ¹ØÏµÃ÷È·¡¢ÕùÒé²»´óµÄ¼òµ¥µÄÃñÊÂ°¸¼ş£¬ÊÊÓÃ±¾ÕÂ¹æ¶¨¡£
+	 * æ¶‰åŠå­å¥³ç”Ÿæ´»è´¹ã€æ•™è‚²è´¹
 	 */
-	public static int row7(Document document,Element newroot) {
-		Element SFBGJBDTHZTTTNode = newroot.addElement("MSAJ").addAttribute("nameCN", "ÃñÊÂ°¸¼ş");
+	public static int row4(Document document, Element newroot) {
+		Element SFBGJBDTHZTTTNode = newroot.addElement("SJZNSHFJYF").addAttribute("nameCN", "æ¶‰åŠå­å¥³ç”Ÿæ´»è´¹ã€æ•™è‚²è´¹");
+
 		int res = 0;
 		String content = util.getAJJBQKString(document);
-		String regex = "¡£|£»|£¬";
-		if(content!=null&&!content.equals("")) {
-			String[] sentence = content.split(regex);
-			for(String s:sentence) {
-				if(s.contains("¼òµ¥")||s.contains("¼òÒ×")) {
-					System.out.println("¼òµ¥£º"+s);
-					if(s.contains("ÃñÊÂ°¸¼ş")||s.contains("³ÌĞò")) {
-						res =1;
-						//System.out.println("ÃñÊÂ°¸¼ş£º"+s);
-						break;
-					}
-				}
-			}
-		}
-		SFBGJBDTHZTTTNode.addAttribute("value",res+"");
-		return res;
-	}
-
-
-	/*
-	 * ÖĞ»ªÈËÃñ¹²ºÍ¹ú»éÒö·¨µÚÈıÊ®°ËÌõ:Éæ¼°¸¸Ä¸Ì½Íû×ÓÅ®
-	 */
-	public static int row8(Document document,Element newroot) {
-		Element SFBGJBDTHZTTTNode = newroot.addElement("SJFMTWZN").addAttribute("nameCN", "Éæ¼°¸¸Ä¸Ì½Íû×ÓÅ®");
-		int res = 0;
-		String content = util.getAJJBQKString(document);
-		if(content!=null&&!content.equals("")) {
-			String[] sentence = content.split("¡£|£»");
-			for(String s:sentence) {
-				if(s.contains("×Ó")||s.contains("Å®")||s.contains("ÄĞ")||s.contains("Å®")||s.contains("º¢")) {
+		if (content != null && !content.equals("")) {
+			String[] sentence = content.split("ã€‚|ï¼›");
+			for (String s : sentence) {
+				if (s.contains("å­") || s.contains("å¥³") || s.contains("ç”·") || s.contains("å¥³") || s.contains("å­©")) {
 					res = 1;
-					String[] ysFlag = {"Ì½Íû","¿´Íû"};
-					//  System.out.println(s);
-					if(util.ifContainFlag(s, ysFlag)) {
-						System.out.println("¿´Íû¡·¡·¡·¡·¡·¡·¡·¡·¡·¡·¡·¡·¡·"+s);
+					String[] ysFlag = {"ç”Ÿæ´»è´¹", "æŠšå…»è´¹", "å­¦è´¹", "æ•™è‚²è´¹"};
+					System.out.println(s);
+					if (util.ifContainFlag(s, ysFlag)) {
 						res = 1;
 						break;
 					}
 				}
 			}
 		}
-		SFBGJBDTHZTTTNode.addAttribute("value",res+"");
+		SFBGJBDTHZTTTNode.addAttribute("value", res + "");
 		return res;
 	}
+
 	/*
-	 * ÖĞ»ªÈËÃñ¹²ºÍ¹ú»éÒö·¨µÚÊ®°ËÌõ:Ò»·½ÓĞÉË²Ğ²¹Öú
+	 * æœ‰å“ºä¹³æœŸå­å¥³
 	 */
-	public static int row9(Document document,Element newroot) {
-		Element SFBGJBDTHZTTTNode = newroot.addElement("YFYSCBZ").addAttribute("nameCN", "Ò»·½ÓĞÉË²Ğ²¹Öú");
+	public static int row5(Document document, Element newroot) {
+		Element SFBGJBDTHZTTTNode = newroot.addElement("YBRQZN").addAttribute("nameCN", "æœ‰å“ºä¹³æœŸå­å¥³");
+
 		int res = 0;
 		String content = util.getAJJBQKString(document);
-		if(content!=null&&!content.equals("")) {
-			String[] sentence = content.split("¡£|£»|£¬");
-			for(String s:sentence) {
-				if(s.contains("ÉË²Ğ²¹Öú")||s.contains("ÉË²Ğ·Ñ")||s.contains("ÉË²Ğ½ğ")) {
+		if (content != null && !content.equals("")) {
+			String regex = "ã€‚|ï¼›";
+			String[] ysFlag = {"å“ºä¹³æœŸ", "è¥è¤“"};
+			util.ifContainYS(content, ysFlag, regex);
+		}
+		SFBGJBDTHZTTTNode.addAttribute("value", res + "");
+		return res;
+	}
+
+	/*
+	 * ä¸­åäººæ°‘å…±å’Œå›½æ°‘äº‹è¯‰è®¼æ³•ç¬¬å…­åå››æ¡ï¼šè¯æ®
+	 */
+	public static int row6(Document document, Element newroot) {
+		Element SFBGJBDTHZTTTNode = newroot.addElement("ZJ").addAttribute("nameCN", "è¯æ®");
+		int res = 0;
+		String content = util.getAJJBQKString(document);
+		if (content != null && !content.equals("")) {
+			String regex = "ã€‚|ï¼›|ï¼Œ";
+			String[] sentence = content.split(regex);
+			for (String s : sentence) {
+				if (s.contains("è¯æ®")) {
+					System.out.println("è¯æ®ï¼š" + s);
+					if (s.contains("æä¾›") || s.contains("æ”¶é›†") || s.contains("è°ƒæŸ¥")) {
+						res = 1;
+						break;
+						//System.out.println("è¯æ®22ï¼š"+s);
+					}
+				}
+			}
+		}
+		SFBGJBDTHZTTTNode.addAttribute("value", res + "");
+		return res;
+	}
+
+	/*
+	 * ä¸­åäººæ°‘å…±å’Œå›½æ°‘äº‹è¯‰è®¼æ³•ç¬¬ä¸€ç™¾å››åäºŒæ¡:ç¬¬ä¸€ç™¾å››åäºŒæ¡ åŸºå±‚äººæ°‘æ³•é™¢å’Œå®ƒæ´¾å‡ºçš„æ³•åº­å®¡ç†äº‹å®æ¸…æ¥šã€æƒåˆ©ä¹‰åŠ¡å…³ç³»æ˜ç¡®ã€äº‰è®®ä¸å¤§çš„ç®€å•çš„æ°‘äº‹æ¡ˆä»¶ï¼Œé€‚ç”¨æœ¬ç« è§„å®šã€‚
+	 */
+	public static int row7(Document document, Element newroot) {
+		Element SFBGJBDTHZTTTNode = newroot.addElement("MSAJ").addAttribute("nameCN", "æ°‘äº‹æ¡ˆä»¶");
+		int res = 0;
+		String content = util.getAJJBQKString(document);
+		String regex = "ã€‚|ï¼›|ï¼Œ";
+		if (content != null && !content.equals("")) {
+			String[] sentence = content.split(regex);
+			for (String s : sentence) {
+				if (s.contains("ç®€å•") || s.contains("ç®€æ˜“")) {
+					System.out.println("ç®€å•ï¼š" + s);
+					if (s.contains("æ°‘äº‹æ¡ˆä»¶") || s.contains("ç¨‹åº")) {
+						res = 1;
+						//System.out.println("æ°‘äº‹æ¡ˆä»¶ï¼š"+s);
+						break;
+					}
+				}
+			}
+		}
+		SFBGJBDTHZTTTNode.addAttribute("value", res + "");
+		return res;
+	}
+
+
+	/*
+	 * ä¸­åäººæ°‘å…±å’Œå›½å©šå§»æ³•ç¬¬ä¸‰åå…«æ¡:æ¶‰åŠçˆ¶æ¯æ¢æœ›å­å¥³
+	 */
+	public static int row8(Document document, Element newroot) {
+		Element SFBGJBDTHZTTTNode = newroot.addElement("SJFMTWZN").addAttribute("nameCN", "æ¶‰åŠçˆ¶æ¯æ¢æœ›å­å¥³");
+		int res = 0;
+		String content = util.getAJJBQKString(document);
+		if (content != null && !content.equals("")) {
+			String[] sentence = content.split("ã€‚|ï¼›");
+			for (String s : sentence) {
+				if (s.contains("å­") || s.contains("å¥³") || s.contains("ç”·") || s.contains("å¥³") || s.contains("å­©")) {
+					res = 1;
+					String[] ysFlag = {"æ¢æœ›", "çœ‹æœ›"};
+					//  System.out.println(s);
+					if (util.ifContainFlag(s, ysFlag)) {
+						System.out.println("çœ‹æœ›ã€‹ã€‹ã€‹ã€‹ã€‹ã€‹ã€‹ã€‹ã€‹ã€‹ã€‹ã€‹ã€‹" + s);
+						res = 1;
+						break;
+					}
+				}
+			}
+		}
+		SFBGJBDTHZTTTNode.addAttribute("value", res + "");
+		return res;
+	}
+
+	/*
+	 * ä¸­åäººæ°‘å…±å’Œå›½å©šå§»æ³•ç¬¬åå…«æ¡:ä¸€æ–¹æœ‰ä¼¤æ®‹è¡¥åŠ©
+	 */
+	public static int row9(Document document, Element newroot) {
+		Element SFBGJBDTHZTTTNode = newroot.addElement("YFYSCBZ").addAttribute("nameCN", "ä¸€æ–¹æœ‰ä¼¤æ®‹è¡¥åŠ©");
+		int res = 0;
+		String content = util.getAJJBQKString(document);
+		if (content != null && !content.equals("")) {
+			String[] sentence = content.split("ã€‚|ï¼›|ï¼Œ");
+			for (String s : sentence) {
+				if (s.contains("ä¼¤æ®‹è¡¥åŠ©") || s.contains("ä¼¤æ®‹è´¹") || s.contains("ä¼¤æ®‹é‡‘")) {
 					//System.out.println(s);
 					res = 1;
 					break;
 				}
 			}
 		}
-		SFBGJBDTHZTTTNode.addAttribute("value",res+"");
+		SFBGJBDTHZTTTNode.addAttribute("value", res + "");
 		return res;
 	}
+
 	/*
-	 * ÖĞ»ªÈËÃñ¹²ºÍ¹ú»éÒö·¨µÚÊ®°ËÌõ£ºÊÇ·ñÓĞÒÅÖö»òÔùÓëºÏÍ¬ÖĞÈ·¶¨Ö»¹é·ò»òÆŞÒ»·½µÄ²Æ²ú
+	 * ä¸­åäººæ°‘å…±å’Œå›½å©šå§»æ³•ç¬¬åå…«æ¡ï¼šæ˜¯å¦æœ‰é—å˜±æˆ–èµ ä¸åˆåŒä¸­ç¡®å®šåªå½’å¤«æˆ–å¦»ä¸€æ–¹çš„è´¢äº§
 	 */
-	public static int row10(Document document,Element newroot) {
-		Element SFBGJBDTHZTTTNode = newroot.addElement("SFYYZHZYHTZQDZGFHQYFDCC").addAttribute("nameCN", "ÊÇ·ñÓĞÒÅÖö»òÔùÓëºÏÍ¬ÖĞÈ·¶¨Ö»¹é·ò»òÆŞÒ»·½µÄ²Æ²ú");
+	public static int row10(Document document, Element newroot) {
+		Element SFBGJBDTHZTTTNode = newroot.addElement("SFYYZHZYHTZQDZGFHQYFDCC").addAttribute("nameCN", "æ˜¯å¦æœ‰é—å˜±æˆ–èµ ä¸åˆåŒä¸­ç¡®å®šåªå½’å¤«æˆ–å¦»ä¸€æ–¹çš„è´¢äº§");
 		int res = 0;
 		String content = util.getAJJBQKString(document);
-		if(content!=null&&!content.equals("")) {
-			String[] sentence = content.split("¡£|£»|£¬");
-			for(String s:sentence) {
-				if(s.contains("ÒÅÖö")||s.contains("ÔùÓë")||s.contains("ÒÅÔù")) {
+		if (content != null && !content.equals("")) {
+			String[] sentence = content.split("ã€‚|ï¼›|ï¼Œ");
+			for (String s : sentence) {
+				if (s.contains("é—å˜±") || s.contains("èµ ä¸") || s.contains("é—èµ ")) {
 					System.out.println(s);
-					if(!s.contains("Ë«·½")&&!s.contains("¹²Í¬")) {
-						//System.out.print("Ë«·½"+s);
+					if (!s.contains("åŒæ–¹") && !s.contains("å…±åŒ")) {
+						//System.out.print("åŒæ–¹"+s);
 						res = 1;
 						break;
 					}
@@ -246,67 +252,69 @@ public class YS {
 				}
 			}
 		}
-		SFBGJBDTHZTTTNode.addAttribute("value",res+"");
+		SFBGJBDTHZTTTNode.addAttribute("value", res + "");
 		return res;
 
 	}
+
 	/*
-	 * ÖĞ»ªÈËÃñ¹²ºÍ¹úÃñÊÂËßËÏ·¨µÚÊ®ÈıÌõ:ÃñÊÂËßËÏ
+	 * ä¸­åäººæ°‘å…±å’Œå›½æ°‘äº‹è¯‰è®¼æ³•ç¬¬åä¸‰æ¡:æ°‘äº‹è¯‰è®¼
 	 */
-	public static int row11(Document document,Element newroot) {
-		Element SFBGJBDTHZTTTNode = newroot.addElement("MSSS").addAttribute("nameCN", "ÃñÊÂËßËÏ");
+	public static int row11(Document document, Element newroot) {
+		Element SFBGJBDTHZTTTNode = newroot.addElement("MSSS").addAttribute("nameCN", "æ°‘äº‹è¯‰è®¼");
 
 		int res = 0;
 		String content = util.getAJJBQKString(document);
-		if(content!=null&&!content.equals("")) {
-			String[] sentence = content.split("¡£|£»|£¬");
-			for(String s:sentence) {
-				if(s.contains("ÃñÊÂ")) {
+		if (content != null && !content.equals("")) {
+			String[] sentence = content.split("ã€‚|ï¼›|ï¼Œ");
+			for (String s : sentence) {
+				if (s.contains("æ°‘äº‹")) {
 					res = 1;
 					break;
 				}
 			}
 		}
-		SFBGJBDTHZTTTNode.addAttribute("value",res+"");
+		SFBGJBDTHZTTTNode.addAttribute("value", res + "");
 		return res;
 
 	}
 
 	/*
-	 * ÖĞ»ªÈËÃñ¹²ºÍ¹ú»éÒö·¨µÚËÄÊ®Ò»Ìõ£º·òÆŞ¹²Í¬Éú»î¸ºÕ®
+	 * ä¸­åäººæ°‘å…±å’Œå›½å©šå§»æ³•ç¬¬å››åä¸€æ¡ï¼šå¤«å¦»å…±åŒç”Ÿæ´»è´Ÿå€º
 	 */
-	public static int row12(Document document,Element newroot) {
-		Element SFBGJBDTHZTTTNode = newroot.addElement("FQGTSHFZ").addAttribute("nameCN", "·òÆŞ¹²Í¬Éú»î¸ºÕ®");
+	public static int row12(Document document, Element newroot) {
+		Element SFBGJBDTHZTTTNode = newroot.addElement("FQGTSHFZ").addAttribute("nameCN", "å¤«å¦»å…±åŒç”Ÿæ´»è´Ÿå€º");
 		int res = 0;
 		String content = util.getAJJBQKString(document);
-		if(content!=null&&!content.equals("")) {
-			String[] sentence = content.split("¡£|£»|£¬");
-			for(String s:sentence) {
-				if(s.contains("¹²Í¬")||s.contains("Ë«·½")) {
-					String[] ysFlag = {"Õ®Îñ","Ç·¿î","¸ºÕ®"};
-					if(util.ifContainFlag(s, ysFlag)) {
+		if (content != null && !content.equals("")) {
+			String[] sentence = content.split("ã€‚|ï¼›|ï¼Œ");
+			for (String s : sentence) {
+				if (s.contains("å…±åŒ") || s.contains("åŒæ–¹")) {
+					String[] ysFlag = {"å€ºåŠ¡", "æ¬ æ¬¾", "è´Ÿå€º"};
+					if (util.ifContainFlag(s, ysFlag)) {
 						res = 1;
 						break;
 					}
 				}
 			}
 		}
-		SFBGJBDTHZTTTNode.addAttribute("value",res+"");
+		SFBGJBDTHZTTTNode.addAttribute("value", res + "");
 		return res;
 
 	}
+
 	/*
-	 * ÖĞ»ªÈËÃñ¹²ºÍ¹úÃñÊÂËßËÏ·¨µÚÒ»°ÙÈıÊ®ËÄÌõ£º¹«¿ªÉóÀí
+	 * ä¸­åäººæ°‘å…±å’Œå›½æ°‘äº‹è¯‰è®¼æ³•ç¬¬ä¸€ç™¾ä¸‰åå››æ¡ï¼šå…¬å¼€å®¡ç†
 	 */
-	public static int row13(Document document,Element newroot) {
-		Element SFBGJBDTHZTTTNode = newroot.addElement("GKSL").addAttribute("nameCN", "¹«¿ªÉóÀí");
+	public static int row13(Document document, Element newroot) {
+		Element SFBGJBDTHZTTTNode = newroot.addElement("GKSL").addAttribute("nameCN", "å…¬å¼€å®¡ç†");
 		int res = 0;
 		String content = util.getAJJBQKString(document);
-		if(content!=null&&!content.equals("")) {
-			String[] sentence = content.split("¡£|£»|£¬");
-			for(String s:sentence) {
-				if(s.contains("¹«¿ª")&&s.contains("ÉóÀí")) {
-//	 	   			 String[] ysFlag = {"Õ®Îñ","Ç·¿î","¸ºÕ®"};
+		if (content != null && !content.equals("")) {
+			String[] sentence = content.split("ã€‚|ï¼›|ï¼Œ");
+			for (String s : sentence) {
+				if (s.contains("å…¬å¼€") && s.contains("å®¡ç†")) {
+//	 	   			 String[] ysFlag = {"å€ºåŠ¡","æ¬ æ¬¾","è´Ÿå€º"};
 //	 	   			 if(util.ifContainFlag(s, ysFlag)) {
 //                        res = 1;
 //	 	   			 }
@@ -316,25 +324,25 @@ public class YS {
 				}
 			}
 		}
-		SFBGJBDTHZTTTNode.addAttribute("value",res+"");
+		SFBGJBDTHZTTTNode.addAttribute("value", res + "");
 		return res;
 	}
 
 	/*
-	 * ÖĞ»ªÈËÃñ¹²ºÍ¹ú»éÒö·¨£ºµÚËÄÊ®¶şÌõ£¬Àë»éºóÒ»·½Éú»îÀ§ÄÑ
+	 * ä¸­åäººæ°‘å…±å’Œå›½å©šå§»æ³•ï¼šç¬¬å››åäºŒæ¡ï¼Œç¦»å©šåä¸€æ–¹ç”Ÿæ´»å›°éš¾
 	 */
-	public static int row14(Document document,Element newroot) {
-		Element SFBGJBDTHZTTTNode = newroot.addElement("LHHYFSHKN").addAttribute("nameCN", "Àë»éºóÒ»·½Éú»îÀ§ÄÑ");
+	public static int row14(Document document, Element newroot) {
+		Element SFBGJBDTHZTTTNode = newroot.addElement("LHHYFSHKN").addAttribute("nameCN", "ç¦»å©šåä¸€æ–¹ç”Ÿæ´»å›°éš¾");
 		int res = 0;
 		String content = util.getAJJBQKString(document);
-		if(content!=null&&!content.equals("")) {
-			String[] sentence = content.split("¡£|£»|£¬");
-			for(String s:sentence) {
-				if(s.contains("Ô­¸æ")||s.contains("±»¸æ")) {
-					if (s.contains("Éú»î") ) {
-						//Ê¹ÓÃ»¬¶¯´°¿Ú
-						String[] keypairs = {"Éú»î;À§ÄÑ","Éú»î;¼èÄÑ","ÎŞ·¨;Éú»î"};
-						if(util.windowForKey(s,keypairs,8)){
+		if (content != null && !content.equals("")) {
+			String[] sentence = content.split("ã€‚|ï¼›|ï¼Œ");
+			for (String s : sentence) {
+				if (s.contains("åŸå‘Š") || s.contains("è¢«å‘Š")) {
+					if (s.contains("ç”Ÿæ´»")) {
+						//ä½¿ç”¨æ»‘åŠ¨çª—å£
+						String[] keypairs = {"ç”Ÿæ´»;å›°éš¾", "ç”Ÿæ´»;è‰°éš¾", "æ— æ³•;ç”Ÿæ´»"};
+						if (util.windowForKey(s, keypairs, 8)) {
 							res = 1;
 							break;
 						}
@@ -343,21 +351,21 @@ public class YS {
 				}
 			}
 		}
-		SFBGJBDTHZTTTNode.addAttribute("value",res+"");
+		SFBGJBDTHZTTTNode.addAttribute("value", res + "");
 		return res;
 	}
 
-	public static int row15(Document document,Element newroot) {
-		Element SFBGJBDTHZTTTNode = newroot.addElement("QQFHCL").addAttribute("nameCN", "ÇëÇó·µ»¹²ÊÀñ");
+	public static int row15(Document document, Element newroot) {
+		Element SFBGJBDTHZTTTNode = newroot.addElement("QQFHCL").addAttribute("nameCN", "è¯·æ±‚è¿”è¿˜å½©ç¤¼");
 		int res = 0;
 		String content = util.getAJJBQKString(document);
-		if(content!=null&&!content.equals("")) {
-			String[] sentence = content.split("¡£|£»");
-			for(String s:sentence) {
-				if(s.contains("²ÊÀñ")&&(s.contains("ÒªÇó")||s.contains("Ö÷ÕÅ")||s.contains("ÇëÇó"))){
+		if (content != null && !content.equals("")) {
+			String[] sentence = content.split("ã€‚|ï¼›");
+			for (String s : sentence) {
+				if (s.contains("å½©ç¤¼") && (s.contains("è¦æ±‚") || s.contains("ä¸»å¼ ") || s.contains("è¯·æ±‚"))) {
 					System.out.println(s);
-					String[]  ysflag = {"·µ»¹","¹é»¹"};
-					if(util.ifContainFlag(s,ysflag)){
+					String[] ysflag = {"è¿”è¿˜", "å½’è¿˜"};
+					if (util.ifContainFlag(s, ysflag)) {
 						res = 1;
 						break;
 					}
@@ -366,50 +374,51 @@ public class YS {
 				}
 			}
 		}
-		SFBGJBDTHZTTTNode.addAttribute("value",res+"");
+		SFBGJBDTHZTTTNode.addAttribute("value", res + "");
 		return res;
 	}
+
 	/*
-	×î¸ßÈËÃñ·¨Ôº¹ØÓÚÊÊÓÃÖĞ»ªÈËÃñ¹²ºÍ¹ú»éÒö·¨Èô¸ÉÎÊÌâµÄ½âÊÍ£¨Ò»£©µÚÎåÌõ:ÒÔ·òÆŞÃûÒå¹²Í¬Éú»î
+	æœ€é«˜äººæ°‘æ³•é™¢å…³äºé€‚ç”¨ä¸­åäººæ°‘å…±å’Œå›½å©šå§»æ³•è‹¥å¹²é—®é¢˜çš„è§£é‡Šï¼ˆä¸€ï¼‰ç¬¬äº”æ¡:ä»¥å¤«å¦»åä¹‰å…±åŒç”Ÿæ´»
 	 */
-	public static int row16(Document document,Element newroot) {
-		Element SFBGJBDTHZTTTNode = newroot.addElement("YFQMYGTSH").addAttribute("nameCN", "ÒÔ·òÆŞÃûÒå¹²Í¬Éú»î");
+	public static int row16(Document document, Element newroot) {
+		Element SFBGJBDTHZTTTNode = newroot.addElement("YFQMYGTSH").addAttribute("nameCN", "ä»¥å¤«å¦»åä¹‰å…±åŒç”Ÿæ´»");
 		int res = 0;
 		String content = util.getAJJBQKString(document);
-		if(content!=null&&!content.equals("")) {
-			String[] sentence = content.split("¡£|£»|£¬");
-			for(String s:sentence) {
-				if(s.contains("Éú»î")&&s.contains("·òÆŞ")&&s.contains("ÃûÒå")){
+		if (content != null && !content.equals("")) {
+			String[] sentence = content.split("ã€‚|ï¼›|ï¼Œ");
+			for (String s : sentence) {
+				if (s.contains("ç”Ÿæ´»") && s.contains("å¤«å¦»") && s.contains("åä¹‰")) {
 					res = 1;
 					break;
-
 
 
 				}
 			}
 		}
-		SFBGJBDTHZTTTNode.addAttribute("value",res+"");
+		SFBGJBDTHZTTTNode.addAttribute("value", res + "");
 		return res;
 	}
+
 	/*
-    ×î¸ßÈËÃñ·¨Ôº¹ØÓÚÈËÃñ·¨ÔºÉóÀíÀë»é°¸¼ş´¦Àí×ÓÅ®¸§ÑøÎÊÌâµÄÈô¸É¾ßÌåÒâ¼ûµÚ3Ìõ£º¸¸·½ºÍÄ¸·½¾ùÒªÇó×ÓÅ®ËæÆäÉú»î
+    æœ€é«˜äººæ°‘æ³•é™¢å…³äºäººæ°‘æ³•é™¢å®¡ç†ç¦»å©šæ¡ˆä»¶å¤„ç†å­å¥³æŠšå…»é—®é¢˜çš„è‹¥å¹²å…·ä½“æ„è§ç¬¬3æ¡ï¼šçˆ¶æ–¹å’Œæ¯æ–¹å‡è¦æ±‚å­å¥³éšå…¶ç”Ÿæ´»
      */
-	public static int row17(Document document,Element newroot) {
-		Element SFBGJBDTHZTTTNode = newroot.addElement("FFHMFJYQZNSQSH").addAttribute("nameCN", "¸¸·½ºÍÄ¸·½¾ùÒªÇó×ÓÅ®ËæÆäÉú»î");
+	public static int row17(Document document, Element newroot) {
+		Element SFBGJBDTHZTTTNode = newroot.addElement("FFHMFJYQZNSQSH").addAttribute("nameCN", "çˆ¶æ–¹å’Œæ¯æ–¹å‡è¦æ±‚å­å¥³éšå…¶ç”Ÿæ´»");
 		int res = 0;
 		String content = util.getAJJBQKString(document);
-		if(content!=null&&!content.equals("")) {
-			String[] sentence = content.split("¡£|£»");
-			for(String s:sentence) {
-				String[] znflag = {"×Ó","Å®","º¢×Ó","¶ù","ÄĞº¢","Å®º¢"};
-				if(util.ifContainFlag(s,znflag)){
+		if (content != null && !content.equals("")) {
+			String[] sentence = content.split("ã€‚|ï¼›");
+			for (String s : sentence) {
+				String[] znflag = {"å­", "å¥³", "å­©å­", "å„¿", "ç”·å­©", "å¥³å­©"};
+				if (util.ifContainFlag(s, znflag)) {
 					//System.out.println(s);
-					//ÕÕ¹Ë£¬¸§Ñø£¬Éú»î£¬¸§Óı
-					String[] fyflag = {"ÕÕ¹Ë","¸§Ñø","Éú»î"};
-					if(util.ifContainFlag(s,fyflag)){
-						String[] qqflag = {"ÒªÇó","ÇëÇó","Ï£Íû","ÕùÒé"};
-						//ÒªÇó¡¢ÇëÇó¡¢Ï£Íû¡¢ÕùÒé
-						if(util.ifContainFlag(s,qqflag)){
+					//ç…§é¡¾ï¼ŒæŠšå…»ï¼Œç”Ÿæ´»ï¼ŒæŠšè‚²
+					String[] fyflag = {"ç…§é¡¾", "æŠšå…»", "ç”Ÿæ´»"};
+					if (util.ifContainFlag(s, fyflag)) {
+						String[] qqflag = {"è¦æ±‚", "è¯·æ±‚", "å¸Œæœ›", "äº‰è®®"};
+						//è¦æ±‚ã€è¯·æ±‚ã€å¸Œæœ›ã€äº‰è®®
+						if (util.ifContainFlag(s, qqflag)) {
 							//System.out.println(s);
 							res = 1;
 							break;
@@ -419,22 +428,23 @@ public class YS {
 				}
 			}
 		}
-		SFBGJBDTHZTTTNode.addAttribute("value",res+"");
+		SFBGJBDTHZTTTNode.addAttribute("value", res + "");
 		return res;
 	}
+
 	/*
-    ÖĞ»ªÈËÃñ¹²ºÍ¹ú»éÒö·¨µÚÈıÊ®Ò»Ìõ:Ë«·½×ÔÔ¸Àë»é
+    ä¸­åäººæ°‘å…±å’Œå›½å©šå§»æ³•ç¬¬ä¸‰åä¸€æ¡:åŒæ–¹è‡ªæ„¿ç¦»å©š
      */
-	public static int row18(Document document,Element newroot) {
-		Element SFBGJBDTHZTTTNode = newroot.addElement("SFZYLH").addAttribute("nameCN", "Ë«·½×ÔÔ¸Àë»é");
+	public static int row18(Document document, Element newroot) {
+		Element SFBGJBDTHZTTTNode = newroot.addElement("SFZYLH").addAttribute("nameCN", "åŒæ–¹è‡ªæ„¿ç¦»å©š");
 		int res = 0;
 		String content = util.getAJJBQKString(document);
-		if(content!=null&&!content.equals("")) {
-			String[] sentence = content.split("¡£|£»|£¬");
-			for(String s:sentence) {
-				if(s.contains("Àë»é")){
+		if (content != null && !content.equals("")) {
+			String[] sentence = content.split("ã€‚|ï¼›|ï¼Œ");
+			for (String s : sentence) {
+				if (s.contains("ç¦»å©š")) {
 					//	System.out.println(s);
-					if((s.contains("×ÔÔ¸")||s.contains("Í¬Òâ"))&&!s.contains("²»Í¬Òâ")&&!s.contains("²»×ÔÔ¸")){
+					if ((s.contains("è‡ªæ„¿") || s.contains("åŒæ„")) && !s.contains("ä¸åŒæ„") && !s.contains("ä¸è‡ªæ„¿")) {
 						//System.out.println(s);
 						res = 1;
 						break;
@@ -442,208 +452,375 @@ public class YS {
 				}
 			}
 		}
-		SFBGJBDTHZTTTNode.addAttribute("value",res+"");
-		return res;
-	}
-
-/*
-ÖĞ»ªÈËÃñ¹²ºÍ¹ú»éÒö·¨µÚÈıÊ®¶şÌõ£ºÓëËûÈËÍ¬¾Ó»òÖØ»é£¨ÖØ»é£»ÓĞÅäÅ¼ÕßÓëËûÈËÍ¬¾Ó£©
- */
-public static  int row19(Document document,Element newroot){
-	Element SFBGJBDTHZTTTNode = newroot.addElement("YTRTJHCH").addAttribute("nameCN", "ÓëËûÈËÍ¬¾Ó»òÖØ»é");
-
-	int JD =0;
-	int flagq = 0;
-	int flagh = 0;
-	String qwStr = "";
-	qwStr = util.getAJJBQKString(document);
-	if(qwStr!=null && !qwStr.equals("")) {
-		String[] qwStrarray = qwStr.split("£¬|¡£");
-		if (qwStrarray != null) {
-			for (String qw : qwStrarray) {
-				if (qw.contains("»éÍâÇé") || qw.contains("µÚÈıÕß") ||
-						qw.contains("³ö¹ì") || qw.contains("Í¬¾Ó") ||
-						qw.contains("êÓÃÁ") || qw.contains("²»Õıµ±¹ØÏµ") || qwStr.contains("ÖØ»é")) {
-					JD = 1;
-					//System.out.println(qw);
-					break;
-				}
-			}
-
-		}
-	}
-	SFBGJBDTHZTTTNode.addAttribute("value",JD+"");
-	return JD;
-
-}
-/*
-ÖĞ»ªÈËÃñ¹²ºÍ¹ú»éÒö·¨µÚÈıÊ®¶şÌõ£º¶ñÏ°£¨¶Ä²©¡¢Îü¶¾µÈ¶ñÏ°ÂÅ½Ì²»¸Ä£©
- */
-
-public static  int row20(Document document,Element newroot){
-	Element SFBGJBDTHZTTTNode = newroot.addElement("EX").addAttribute("nameCN", "¶ñÏ°");
-	int JD =0;
-	String qwStr = "";
-	qwStr = util.getAJJBQKString(document);
-	if(qwStr!=null && !qwStr.equals("")) {
-		String[] qwStrarray = qwStr.split("£¬|¡£");
-		if (qwStrarray != null) {
-			for (String qw : qwStrarray) {
-				if(qw.contains("¶Ä²©")||qw.contains("Îü¶¾")||qw.contains("Ğï¾Æ")||qw.contains("¶ñÏ°")
-						){
-					JD = 1;
-					//System.out.println(qw);
-					break;
-				}
-			}
-
-		}
-	}
-	SFBGJBDTHZTTTNode.addAttribute("value",JD+"");
-	return JD;
-
-}
-/*
-ÖĞ»ªÈËÃñ¹²ºÍ¹ú»éÒö·¨µÚÈıÊ®¶şÌõ£º:·Ö¾ÓÂúÁ½Äê
- */
-	public static int row21(Document document, Element newroot) {
-		Element SFBGJBDTHZTTTNode = newroot.addElement("FJMLN").addAttribute("nameCN", "·Ö¾ÓÂúÁ½Äê");
-		int res = 0;
-		System.out.println(document.getName());
-		String content = util.getAJJBQKString(document);
-		if(content!=null&&!content.equals("")) {
-			String[] sentence = content.split("¡£|£»");
-			for(String s:sentence) {
-				if(s.contains("·Ö¾Ó")||s.contains("Àë¼Ò³ö×ß")){
-					//System.out.println(s);
-					res = 1;
-					break;
-				}
-
-			}
-		}
-		SFBGJBDTHZTTTNode.addAttribute("value",res+"");
-
+		SFBGJBDTHZTTTNode.addAttribute("value", res + "");
 		return res;
 	}
 
 	/*
-	Éæ¼°·òÆŞ¹²Í¬²Æ²ú
-	 */
-	public static int row22(Document document,Element newroot) {
-		Element SFBGJBDTHZTTTNode = newroot.addElement("SJFQGTCC").addAttribute("nameCN", "Éæ¼°·òÆŞ¹²Í¬²Æ²ú");
-		int res = 0;
-		System.out.println(document.getName());
-		String content = util.getAJJBQKString(document);
-		if(content!=null&&!content.equals("")) {
-			String[] sentence = content.split("£¬|£»|¡£");
-			for(String s:sentence){
-				if(s.contains("·òÆŞ")&&s.contains("²Æ²ú")){
-				//	System.out.println(s);
-					res = 1;
-					break;
-				}
-			}
+    ä¸­åäººæ°‘å…±å’Œå›½å©šå§»æ³•ç¬¬ä¸‰åäºŒæ¡ï¼šä¸ä»–äººåŒå±…æˆ–é‡å©šï¼ˆé‡å©šï¼›æœ‰é…å¶è€…ä¸ä»–äººåŒå±…ï¼‰
+     */
+	public static int row19(Document document, Element newroot) {
+		Element SFBGJBDTHZTTTNode = newroot.addElement("YTRTJHCH").addAttribute("nameCN", "ä¸ä»–äººåŒå±…æˆ–é‡å©š");
 
-
-		}
-		SFBGJBDTHZTTTNode.addAttribute("value",res+"");
-
-		return res;
-	}
-/*
-¼Ò±©
-
- */
-/*
- * 10.ÊÇ·ñ´æÔÚ¼ÒÍ¥±©Á¦»òÅ°´ı¡¢ÒÅÆú¼ÒÍ¥³ÉÔ±µÄÇéĞÎ
- * Ê¹ÓÃCMSSDÖĞµÄÄÚÈİ×÷ÎªÅĞ¶Ï
- */
-public static void row23(Document document, Element newroot){
-	Element SFCZJTBLNodeYQJTCYNode = newroot.addElement("SFCZJTBLNodeYQJTCY").addAttribute("nameCN", "ÊÇ·ñ´æÔÚ¼ÒÍ¥±©Á¦»òÅ°´ı¡¢ÒÅÆú¼ÒÍ¥³ÉÔ±µÄÇéĞÎ");
-	Element root = document.getRootElement();
-	String JD ="0";
-	int fnull = 0;
-	if(root.element("AJJBQK")!=null){
-		Element ajjbqkNode = root.element("AJJBQK");
-		if(ajjbqkNode.element("CMSSD")!=null){
-			Element cmssdNode = ajjbqkNode.element("CMSSD");
-			if(cmssdNode.attribute("value")!=null){
-
-				String qwStr = cmssdNode.attributeValue("value");
-				//System.out.println(qwStr);
-				if(qwStr!=null&&!qwStr.equals("")) {
-					String[] qwStrarray = qwStr.split("£¬|¡£|£»");
-					for (String qw : qwStrarray) {
-						if ((qw.contains("Å¹´ò") || qw.contains("Å°´ı") || qw.contains("±©Á¦") ||
-								qw.contains("Å×Æú") || qw.contains("ÒÅÆú") || qw.contains("¶¯ÊÖ"))) {
-							fnull = 1;
-							if ((qw.contains("Å¹´ò") || qw.contains("Å°´ı") || qw.contains("±©Á¦") ||
-									qw.contains("Å×Æú") || qw.contains("ÒÅÆú") || qw.contains("¶¯ÊÖ")) &&
-									(!qw.contains("²¢Î´") || !qw.contains("Ã»ÓĞ") || !qw.contains("´ÓÎ´"))) {
-								JD = "1";
-								break;
-							}
-						}
+		int JD = 0;
+		int flagq = 0;
+		int flagh = 0;
+		String qwStr = "";
+		qwStr = util.getAJJBQKString(document);
+		if (qwStr != null && !qwStr.equals("")) {
+			String[] qwStrarray = qwStr.split("ï¼Œ|ã€‚");
+			if (qwStrarray != null) {
+				for (String qw : qwStrarray) {
+					if (qw.contains("å©šå¤–æƒ…") || qw.contains("ç¬¬ä¸‰è€…") ||
+							qw.contains("å‡ºè½¨") || qw.contains("åŒå±…") ||
+							qw.contains("æš§æ˜§") || qw.contains("ä¸æ­£å½“å…³ç³»") || qwStr.contains("é‡å©š")) {
+						JD = 1;
+						//System.out.println(qw);
+						break;
 					}
 				}
 
 			}
 		}
+		SFBGJBDTHZTTTNode.addAttribute("value", JD + "");
+		return JD;
+
 	}
-	System.out.println(JD);
-
-		SFCZJTBLNodeYQJTCYNode.addAttribute("value",JD);
-
-}
 /*
-ÓĞ2ÖÜËêÒÔÏÂ×ÓÅ®
+ä¸­åäººæ°‘å…±å’Œå›½å©šå§»æ³•ç¬¬ä¸‰åäºŒæ¡ï¼šæ¶ä¹ ï¼ˆèµŒåšã€å¸æ¯’ç­‰æ¶ä¹ å±¡æ•™ä¸æ”¹ï¼‰
  */
-public static int row24(Document document,Element newroot) {
-	Element SFBGJBDTHZTTTNode = newroot.addElement("YLZSYXZN").addAttribute("nameCN", "ÓĞ2ÖÜËêÒ»ÏÂ×ÓÅ®");
-	int res = 0;
-	System.out.println(document.getName());
-	String content = util.getAJJBQKString(document);
-	if(content!=null&&!content.equals("")) {
-		String[] sentence = content.split("£»|¡£");
-		for(String s:sentence) {
-			if ((s.contains("»éÉú") || s.contains("Ô­¡¢±»¸æ") || s.contains("Ë«·½")) && (s.contains("×Ó") || s.contains("Å®") || s.contains("º¢×Ó") || s.contains("ÄĞº¢"))) {
-				System.out.println("all" + s);
-				if ((s.contains("Á½ÖÜËê") || s.contains("Á½Ëê") || s.contains("2ÖÜËê") || s.contains("2Ëê")) && (s.contains("Î´Âú") && s.contains("²»Âú") || s.contains("²»×ã") || s.contains("Î´×ã") || s.contains("ÒÔÏÂ"))) {
+
+	public static int row20(Document document, Element newroot) {
+		Element SFBGJBDTHZTTTNode = newroot.addElement("EX").addAttribute("nameCN", "æ¶ä¹ ");
+		int JD = 0;
+		String qwStr = "";
+		qwStr = util.getAJJBQKString(document);
+		if (qwStr != null && !qwStr.equals("")) {
+			String[] qwStrarray = qwStr.split("ï¼Œ|ã€‚");
+			if (qwStrarray != null) {
+				for (String qw : qwStrarray) {
+					if (qw.contains("èµŒåš") || qw.contains("å¸æ¯’") || qw.contains("é…—é…’") || qw.contains("æ¶ä¹ ")
+							) {
+						JD = 1;
+						//System.out.println(qw);
+						break;
+					}
+				}
+
+			}
+		}
+		SFBGJBDTHZTTTNode.addAttribute("value", JD + "");
+		return JD;
+
+	}
+
+	/*
+    ä¸­åäººæ°‘å…±å’Œå›½å©šå§»æ³•ç¬¬ä¸‰åäºŒæ¡ï¼š:åˆ†å±…æ»¡ä¸¤å¹´
+     */
+	public static int row21(Document document, Element newroot) {
+		Element SFBGJBDTHZTTTNode = newroot.addElement("FJMLN").addAttribute("nameCN", "åˆ†å±…æ»¡ä¸¤å¹´");
+		int res = 0;
+		System.out.println(document.getName());
+		String content = util.getAJJBQKString(document);
+		if (content != null && !content.equals("")) {
+			String[] sentence = content.split("ã€‚|ï¼›");
+			for (String s : sentence) {
+				if (s.contains("åˆ†å±…") || s.contains("ç¦»å®¶å‡ºèµ°")) {
 					//System.out.println(s);
+					res = 1;
+					break;
+				}
+
+			}
+		}
+		SFBGJBDTHZTTTNode.addAttribute("value", res + "");
+
+		return res;
+	}
+
+	/*
+	æ¶‰åŠå¤«å¦»å…±åŒè´¢äº§
+	 */
+	public static int row22(Document document, Element newroot) {
+		Element SFBGJBDTHZTTTNode = newroot.addElement("SJFQGTCC").addAttribute("nameCN", "æ¶‰åŠå¤«å¦»å…±åŒè´¢äº§");
+		int res = 0;
+		System.out.println(document.getName());
+		String content = util.getAJJBQKString(document);
+		if (content != null && !content.equals("")) {
+			String[] sentence = content.split("ï¼Œ|ï¼›|ã€‚");
+			for (String s : sentence) {
+				if (s.contains("å¤«å¦»") && s.contains("è´¢äº§")) {
+					//	System.out.println(s);
+					res = 1;
+					break;
+				}
+			}
+
+
+		}
+		SFBGJBDTHZTTTNode.addAttribute("value", res + "");
+
+		return res;
+	}
+
+	/*
+    å®¶æš´
+
+     */
+	/*
+	 * 10.æ˜¯å¦å­˜åœ¨å®¶åº­æš´åŠ›æˆ–è™å¾…ã€é—å¼ƒå®¶åº­æˆå‘˜çš„æƒ…å½¢
+	 * ä½¿ç”¨CMSSDä¸­çš„å†…å®¹ä½œä¸ºåˆ¤æ–­
+	 */
+	public static void row23(Document document, Element newroot) {
+		Element SFCZJTBLNodeYQJTCYNode = newroot.addElement("SFCZJTBLNodeYQJTCY").addAttribute("nameCN", "æ˜¯å¦å­˜åœ¨å®¶åº­æš´åŠ›æˆ–è™å¾…ã€é—å¼ƒå®¶åº­æˆå‘˜çš„æƒ…å½¢");
+		Element root = document.getRootElement();
+		String JD = "0";
+		int fnull = 0;
+		if (root.element("AJJBQK") != null) {
+			Element ajjbqkNode = root.element("AJJBQK");
+			if (ajjbqkNode.element("CMSSD") != null) {
+				Element cmssdNode = ajjbqkNode.element("CMSSD");
+				if (cmssdNode.attribute("value") != null) {
+
+					String qwStr = cmssdNode.attributeValue("value");
+					//System.out.println(qwStr);
+					if (qwStr != null && !qwStr.equals("")) {
+						String[] qwStrarray = qwStr.split("ï¼Œ|ã€‚|ï¼›");
+						for (String qw : qwStrarray) {
+							if ((qw.contains("æ®´æ‰“") || qw.contains("è™å¾…") || qw.contains("æš´åŠ›") ||
+									qw.contains("æŠ›å¼ƒ") || qw.contains("é—å¼ƒ") || qw.contains("åŠ¨æ‰‹"))) {
+								fnull = 1;
+								if ((qw.contains("æ®´æ‰“") || qw.contains("è™å¾…") || qw.contains("æš´åŠ›") ||
+										qw.contains("æŠ›å¼ƒ") || qw.contains("é—å¼ƒ") || qw.contains("åŠ¨æ‰‹")) &&
+										(!qw.contains("å¹¶æœª") || !qw.contains("æ²¡æœ‰") || !qw.contains("ä»æœª"))) {
+									JD = "1";
+									break;
+								}
+							}
+						}
+					}
+
+				}
+			}
+		}
+		System.out.println(JD);
+
+		SFCZJTBLNodeYQJTCYNode.addAttribute("value", JD);
+
+	}
+
+	/*
+    æœ‰2å‘¨å²ä»¥ä¸‹å­å¥³
+     */
+	public static int row24(Document document, Element newroot) {
+		Element SFBGJBDTHZTTTNode = newroot.addElement("YLZSYXZN").addAttribute("nameCN", "æœ‰2å‘¨å²ä»¥ä¸‹å­å¥³");
+		int res = 0;
+		System.out.println(document.getName());
+		String content = util.getAJJBQKString(document);
+		if (content != null && !content.equals("")) {
+			String[] sentence = content.split("ï¼›|ã€‚");
+			for (String s : sentence) {
+				if ((s.contains("å©šç”Ÿ") || s.contains("åŸã€è¢«å‘Š") || s.contains("åŒæ–¹")) && (s.contains("å­") || s.contains("å¥³") || s.contains("å­©å­") || s.contains("ç”·å­©"))) {
+					System.out.println("all" + s);
+					if ((s.contains("ä¸¤å‘¨å²") || s.contains("ä¸¤å²") || s.contains("2å‘¨å²") || s.contains("2å²")) && (s.contains("æœªæ»¡") && s.contains("ä¸æ»¡") || s.contains("ä¸è¶³") || s.contains("æœªè¶³") || s.contains("ä»¥ä¸‹"))) {
+						//System.out.println(s);
+						res = 1;
+						break;
+					}
+				}
+			}
+		}
+		SFBGJBDTHZTTTNode.addAttribute("value", res + "");
+		return res;
+	}
+
+	/*
+    ç¦»å©šå‰å­å¥³æ˜¯å¦éšç¥–çˆ¶æ¯ç”Ÿæ´»
+     */
+	public static int row25(Document document, Element newroot) {
+		Element SFBGJBDTHZTTTNode = newroot.addElement("LHQZNSFSZFMSH").addAttribute("nameCN", "ç¦»å©šå‰å­å¥³æ˜¯å¦éšç¥–çˆ¶æ¯ç”Ÿæ´»");
+		int res = 0;
+		System.out.println(document.getName());
+		String content = util.getAJJBQKString(document);
+		if (content != null && !content.equals("")) {
+			String[] sentence = content.split("ï¼›|ã€‚");
+			for (String s : sentence) {
+				if ((s.contains("ç¥–æ¯") || s.contains("ç¥–çˆ¶") || s.contains("çˆ·çˆ·") ||
+						s.contains("å¥¶å¥¶") || s.contains("å¤–å…¬") || s.contains("å¤–å©†")) && (s.contains("ç”Ÿæ´»") || s.contains("å±…ä½") || s.contains("æŠšå…»") ||
+						s.contains("æˆé•¿"))) {
+					//	System.out.println(s);
+					res = 1;
+					break;
+
+				}
+			}
+		}
+		SFBGJBDTHZTTTNode.addAttribute("value", res + "");
+		return res;
+	}
+
+	/*
+        ä¸€æ–¹è¢«ä¾æ³•åˆ¤å¤„é•¿æœŸå¾’åˆ‘æˆ–è¿æ³•
+        */
+	public static int row26(Document document, Element newroot) {
+		Element SFBGJBDTHZTTTNode = newroot.addElement("YFBYFPCCQTXHWF").addAttribute("nameCN", "ä¸€æ–¹è¢«ä¾æ³•åˆ¤å¤„é•¿æœŸå¾’åˆ‘æˆ–è¿æ³•");
+		int res = 0;
+		System.out.println(document.getName());
+		String content = util.getAJJBQKString(document);
+		if (content != null && !content.equals("")) {
+			String[] sentence = content.split("ï¼›|ã€‚");
+			for (String s : sentence) {
+				if (s.contains("åˆ¤åˆ‘") || s.contains("æœåˆ‘") || s.contains("åˆ¤å¤„") || s.contains("æœ‰æœŸå¾’åˆ‘") ||
+						(s.contains("çŠ¯") && s.contains("ç½ª")) || s.contains("è¿æ³•") || s.contains("åˆ‘")) {
+					//	System.out.println(s);
+					res = 1;
+					break;
+
+				}
+			}
+		}
+		SFBGJBDTHZTTTNode.addAttribute("value", res + "");
+		return res;
+	}
+
+	/*
+    å©šåæœªå»ºç«‹èµ·å¤«å¦»æ„Ÿæƒ…
+     */
+	public static int row27(Document document, Element newroot) {
+		Element SFBGJBDTHZTTTNode = newroot.addElement("HHWJLQFQGQ").addAttribute("nameCN", "å©šåæœªå»ºç«‹èµ·å¤«å¦»æ„Ÿæƒ…");
+		int res = 0;
+		System.out.println(document.getName());
+		String content = util.getAJJBQKString(document);
+		if (content != null && !content.equals("")) {
+			String[] sentence = content.split("ï¼›|ã€‚");
+			for (String s : sentence) {
+				if (((s.contains("æœª") || s.contains("ä¸èƒ½") || s.contains("æ²¡æœ‰")) && s.contains("å»ºç«‹") && s.contains("å¤«å¦»æ„Ÿæƒ…"))) {
 					res = 1;
 					break;
 				}
 			}
 		}
+		SFBGJBDTHZTTTNode.addAttribute("value", res + "");
+		return res;
 	}
-	SFBGJBDTHZTTTNode.addAttribute("value",res+"");
-	return res;
-}
-/*
-Àë»éÇ°×ÓÅ®ÊÇ·ñËæ×æ¸¸Ä¸Éú»î
- */
-public static int row25(Document document,Element newroot) {
-	Element SFBGJBDTHZTTTNode = newroot.addElement("LHQZNSFSZFMSH").addAttribute("nameCN", "Àë»éÇ°×ÓÅ®ÊÇ·ñËæ×æ¸¸Ä¸Éú»î");
-	int res = 0;
-	System.out.println(document.getName());
-	String content = util.getAJJBQKString(document);
-	if(content!=null&&!content.equals("")) {
-		String[] sentence = content.split("£»|¡£");
-		for(String s:sentence) {
-			if((s.contains("×æÄ¸")||s.contains("×æ¸¸")||s.contains("Ò¯Ò¯")||
-					s.contains("ÄÌÄÌ")||s.contains("Íâ¹«")||s.contains("ÍâÆÅ"))&&(s.contains("Éú»î")||s.contains("¾Ó×¡")||s.contains("¸§Ñø")||
-					s.contains("³É³¤"))) {
-			//	System.out.println(s);
-				res = 1;
-				break;
 
+	/*
+    å©šå‰è´¢äº§
+     */
+	public static int row28(Document document, Element newroot) {
+		Element SFBGJBDTHZTTTNode = newroot.addElement("HQCC").addAttribute("nameCN", "å©šå‰è´¢äº§");
+		int res = 0;
+		System.out.println(document.getName());
+		String content = util.getAJJBQKString(document);
+		if (content != null && !content.equals("")) {
+			String[] sentence = content.split("ï¼›|ã€‚");
+			for (String s : sentence) {
+				if (s.contains("å©šå‰") && s.contains("è´¢äº§")) {
+					res = 1;
+					System.out.println(s);
+					break;
+				}
 			}
 		}
+		SFBGJBDTHZTTTNode.addAttribute("value", res + "");
+		return res;
 	}
-	SFBGJBDTHZTTTNode.addAttribute("value",res+"");
-	return res;
-}
+
+
+	/*
+    æ¶‰åŠèµ¡å…»çˆ¶æ¯
+     */
+	public static int row29(Document document, Element newroot) {
+		Element SFBGJBDTHZTTTNode = newroot.addElement("SYFM").addAttribute("nameCN", "èµ¡å…»çˆ¶æ¯");
+		int res = 0;
+		System.out.println(document.getName());
+		String content = util.getAJJBQKString(document);
+		if (content != null && !content.equals("")) {
+			String[] sentence = content.split("ï¼›|ã€‚|ï¼Œ");
+			for (String s : sentence) {
+				if (s.contains("èµ¡å…»")) {
+
+
+					res = 1;
+					System.out.println(s);
+					break;
+				}
+			}
+		}
+		SFBGJBDTHZTTTNode.addAttribute("value", res + "");
+		return res;
+	}
+
+	/*
+    å·²ç»“å©šç™»è®°
+     */
+	public static int row30(Document document, Element newroot) {
+		Element SFBGJBDTHZTTTNode = newroot.addElement("YJHDJ").addAttribute("nameCN", "å·²ç»“å©šç™»è®°");
+		int res = 0;
+		System.out.println(document.getName());
+		String content = util.getAJJBQKString(document);
+		if (content != null && !content.equals("")) {
+			String[] sentence = content.split("ï¼›|ã€‚");
+			for (String s : sentence) {
+				if ((s.contains("ç»“å©š") && s.contains("ç™»è®°"))||(s.contains("é¢†è¯"))) {
+					res = 1;
+					System.out.println(s);
+					break;
+				}
+			}
+		}
+		SFBGJBDTHZTTTNode.addAttribute("value", res + "");
+		return res;
+	}
+
+	/*
+    å®¶åº­å…³ç³»æ˜¯å¦å’Œç¦
+     */
+	public static int row31(Document document, Element newroot) {
+		Element SFBGJBDTHZTTTNode = newroot.addElement("JTGXSFHM").addAttribute("nameCN", "å®¶åº­å…³ç³»æ˜¯å¦å’Œç¦");
+		int res = 0;
+		System.out.println(document.getName());
+		String content = util.getAJJBQKString(document);
+		if (content != null && !content.equals("")) {
+			String[] sentence = content.split("ï¼›|ã€‚|ï¼Œ");
+			for (String s : sentence) {
+				if (s.contains("å®¶åº­") || s.contains("ç›¸å¤„") || s.contains("å…³ç³»")) {
+
+					if (s.contains("å’Œç¦") || s.contains("èæ´½")) {
+						if (!s.contains("éš¾ä»¥") && !s.contains("ä¸") && !s.contains("æ— æ³•")) {
+							res = 1;
+							break;
+						}
+					}
+				}
+			}
+
+		}
+		SFBGJBDTHZTTTNode.addAttribute("value", res + "");
+		return res;
+	}
+
+	/*
+	è´¢äº§è½¬ç§»
+	 */
+	public static int row32(Document document, Element newroot) {
+		Element SFBGJBDTHZTTTNode = newroot.addElement("CCZY").addAttribute("nameCN", "æ“¦äº§è½¬ç§»");
+		int res = 0;
+		System.out.println(document.getName());
+		String content = util.getAJJBQKString(document);
+		if (content != null && !content.equals("")) {
+			String[] sentence = content.split("ï¼›|ã€‚");
+			for (String s : sentence) {
+				if(s.contains("è½¬ç§»")){
+					res = 1;
+					break;
+				}
+			}
+
+		}
+		SFBGJBDTHZTTTNode.addAttribute("value", res + "");
+		return res;
+	}
 
 
 

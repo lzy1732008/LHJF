@@ -15,24 +15,22 @@ public class Main {
 	private static YS YSMETHOD = new YS();
 	public static void main(String args[]) {
 		SAXReader reader = new SAXReader();
-		File file = new File("/users/wenny/Downloads/2013测试");
-		File[] list = file.listFiles();
-		String res = "";
-		System.out.print(list.length);
-		try{
+		File file = new File("/users/wenny/Downloads/2013娴嬭瘯");
+		if(file.exists()) {
+			File[] list = file.listFiles();
+			System.out.print(list.length);
+			try {
+				for (int j = 0; j < 200; j++) {
+					Document document = reader.read(list[j]);
+					String fileName = list[j].getName();
+					String path = list[j].getPath();
+					System.out.println(list[j].getPath() + "order:" + j);
 
-			for(int j =0 ;j < 234; j++){
-				Document document = reader.read(list[j]);
-				String fileName = list[j].getName();
-				String path = list[j].getPath();
-					 System.out.println(list[j].getPath()+"order:"+j);
 
-				//第一部分*******************
-				//创建新xml
-				Element newroot0 = DocumentHelper.createElement("write");
-				Document documentnew = DocumentHelper.createDocument(newroot0);
-				initXML(document,newroot0);
-				Element newroot = newroot0.addElement("LHJHYSTQ").addAttribute("nameCN", "离婚纠纷要素提取");
+					Element newroot0 = DocumentHelper.createElement("write");
+					Document documentnew = DocumentHelper.createDocument(newroot0);
+					initXML(document, newroot0);
+					Element newroot = newroot0.addElement("LHJHYSTQ").addAttribute("nameCN", "绂诲瑕佺礌鎻愬彇");
 
 				YSMETHOD.row1(document,newroot);
 				YSMETHOD.row2(document,newroot);
@@ -59,6 +57,13 @@ public class Main {
 				YSMETHOD.row23(document,newroot);
 				YSMETHOD.row24(document,newroot);
 				YSMETHOD.row25(document,newroot);
+				YSMETHOD.row26(document,newroot);
+				YSMETHOD.row27(document,newroot);
+                YSMETHOD.row28(document, newroot);
+                YSMETHOD.row29(document, newroot);
+                YSMETHOD.row30(document, newroot);
+                YSMETHOD.row31(document, newroot);
+                YSMETHOD.row32(document, newroot);
 
 				HyfjsExtractor.parentBuyHouse(path,document,newroot);
 				HyfjsExtractor.hasChildrenIndependent(path,document,newroot);
@@ -73,32 +78,27 @@ public class Main {
 				HyfjsExtractor.gthd(path,document,newroot);
 
 
-
-
-
 				OutputFormat format = new OutputFormat("    ",true);
-				format.setEncoding("UTF-8");//设置编码格式
-				XMLWriter xmlWriter = new XMLWriter(new FileOutputStream("/users/wenny/Downloads/2013测试xmlres/"+fileName+"要素提取.xml"),format);
+				format.setEncoding("UTF-8");
+				XMLWriter xmlWriter = new XMLWriter(new FileOutputStream("D:\\nju\\task\\娉曟潯鎺ㄨ崘\\2013娴嬭瘯res\\"+fileName+"res.xml"),format);
 				xmlWriter.write(documentnew);
 				xmlWriter.close();
+				}
+
+
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-
-
-		}catch(Exception e){
-			e.printStackTrace();
 		}
-
 
 
 
 
 	}
 
-	public static void initXML(Document document,Element newroot){//将原文加进去
-		System.out.println("开始获取原xml节点");
+	public static void initXML(Document document,Element newroot){
 		Element root = document.getRootElement();
 		newroot.add((Element)root.clone());
-		//System.out.println(root.getText());
-		System.out.println("获取成功");
+
 	}
 }

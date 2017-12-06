@@ -25,12 +25,12 @@ import util.XMLReader;
  *
  */
 public class HyfjsExtractor {
-
+	
 	/**
 	 * 父母为子女购房
 	 */
 	public static void parentBuyHouse(String path,Document document,Element newroot) throws XPathExpressionException, ParserConfigurationException, SAXException, IOException{
-		Element root = document.getRootElement();
+		Element root = document.getRootElement();  
 		Element FMWZNGFNode = newroot.addElement("FMWZNGF").addAttribute("nameCN", "父母为子女购房");
 		String nodepath="//QW//AJJBQK//CMSSD/@value";
 		String cmssd = XMLReader.getXMLNode(path, nodepath);
@@ -62,7 +62,7 @@ public class HyfjsExtractor {
 	 */
 	public static void hasChildrenIndependent(String path,Document document,Element newroot) throws XPathExpressionException, ParserConfigurationException, SAXException, IOException{
 //		先做关于年龄的，在做关于学历的，在做关于身体残疾的
-		Element root = document.getRootElement();
+		Element root = document.getRootElement();  
 		Element DLSHZNNode = newroot.addElement("DLSHZN").addAttribute("nameCN", "不能独立生活的子女");
 		String nodepath="//QW//AJJBQK/@value";
 		String ajjbqk = XMLReader.getXMLNode(path, nodepath);
@@ -91,22 +91,22 @@ public class HyfjsExtractor {
 			DLSHZNNode.addAttribute("value", "0");
 		}
 	}
-
-
+	
+	
 	/**
 	 * 以夫妻名义生活
 	 * 当事人依据婚姻法第十条规定向人民法院申请宣告婚姻无效的，申请时，法定的无效婚姻情形已经消失的，人民法院不予支持。
 	 */
 	public static void dliveAsspouse(String path,Document document,Element newroot) throws XPathExpressionException, ParserConfigurationException, SAXException, IOException{
-
+		
 	}
-
+	
 	/**
 	 * 涉及房屋
 	 * 在案件基本情况中是否包含“房屋”
 	 */
 	public static void aboutHouse(String path,Document document,Element newroot) throws XPathExpressionException, ParserConfigurationException, SAXException, IOException{
-		Element root = document.getRootElement();
+		Element root = document.getRootElement();  
 		Element node = newroot.addElement("SJFW").addAttribute("nameCN", "涉及房屋");
 		String nodepath="//QW//AJJBQK/@value";
 		String ajjbqk = XMLReader.getXMLNode(path, nodepath);
@@ -118,13 +118,13 @@ public class HyfjsExtractor {
 			node.addAttribute("value", "0");
 		}
 	}
-
+	
 	/**
 	 * 涉及夫妻间互相抚养
 	 * 在案件基本情况中是否包含“房屋”
 	 */
 	public static void raiseSpouse(String path,Document document,Element newroot) throws XPathExpressionException, ParserConfigurationException, SAXException, IOException{
-		Element root = document.getRootElement();
+		Element root = document.getRootElement();  
 		Element node = newroot.addElement("FQJHXFY").addAttribute("nameCN", "涉及夫妻间互相抚养");
 		String nodepath="//QW//AJJBQK/@value";
 		String ajjbqk = XMLReader.getXMLNode(path, nodepath);
@@ -146,12 +146,12 @@ public class HyfjsExtractor {
 		else
 			node.addAttribute("value", "0");
 	}
-
+	
 	/**
 	 * 已结婚登记
 	 */
 	public static void marriageRegistration(String path,Document document,Element newroot) throws XPathExpressionException, ParserConfigurationException, SAXException, IOException{
-		Element root = document.getRootElement();
+		Element root = document.getRootElement();  
 		Element node = newroot.addElement("JHDJ").addAttribute("nameCN", "已结婚登记");
 		String nodepath="//QW//AJJBQK/@value";
 		String ajjbqk = XMLReader.getXMLNode(path, nodepath);
@@ -162,15 +162,15 @@ public class HyfjsExtractor {
 			node.addAttribute("value", "0");
 		}
 	}
-
-
+		
+	
 	/**
 	 * 子女医疗费用
-	 *
-	 * 婚姻法第二十一条所称“抚养费”，包括子女生活费、教育费、医疗费等费用。
+	 * 
+	 * 婚姻法第二十一条所称“抚养费”，包括子女生活费、教育费、医疗费等费用。 
 	 */
 	public static void childMaintenance(String path,Document document,Element newroot) throws XPathExpressionException, ParserConfigurationException, SAXException, IOException{
-		Element root = document.getRootElement();
+		Element root = document.getRootElement();  
 		Element node = newroot.addElement("ZNYLF").addAttribute("nameCN", "子女医疗费用");
 		String nodepath="//QW//AJJBQK//YGSCD/@value";
 		String ajjbqk = XMLReader.getXMLNode(path, nodepath);
@@ -192,13 +192,13 @@ public class HyfjsExtractor {
 			node.addAttribute("value", "0");
 		}
 	}
-
-
+	
+	
 	/**
 	 * 女方是否怀孕或分娩后一年内或中止妊娠后六个月
 	 */
 	public static void hyInOneYear(String path,Document document,Element newroot) throws XPathExpressionException, ParserConfigurationException, SAXException, IOException{
-		Element root = document.getRootElement();
+		Element root = document.getRootElement();  
 		Element node = newroot.addElement("HYMFRS").addAttribute("nameCN", "女方是否怀孕或分娩后一年内或中止妊娠后六个月");
 		String nodepath="//QW//CPFXGC/@value";
 		String cpfxgc = XMLReader.getXMLNode(path, nodepath);
@@ -213,12 +213,12 @@ public class HyfjsExtractor {
 			node.addAttribute("value", "0");
 		}
 	}
-
+	
 	/**
 	 * 有关财产书面约定
 	 */
 	public static void ccyd(String path,Document document,Element newroot) throws XPathExpressionException, ParserConfigurationException, SAXException, IOException{
-		Element root = document.getRootElement();
+		Element root = document.getRootElement();  
 		Element node = newroot.addElement("CCYD").addAttribute("nameCN", "有关财产书面约定");
 		String nodepath="//QW//CPFXGC/@value";
 		String cpfxgc = XMLReader.getXMLNode(path, nodepath);
@@ -233,12 +233,12 @@ public class HyfjsExtractor {
 			node.addAttribute("value", "0");
 		}
 	}
-
+	
 	/**
 	 * 转移财产
 	 */
 	public static void zycc(String path,Document document,Element newroot) throws XPathExpressionException, ParserConfigurationException, SAXException, IOException{
-		Element root = document.getRootElement();
+		Element root = document.getRootElement();  
 		Element node = newroot.addElement("ZYCC").addAttribute("nameCN", "是否存在转移财产等行为");
 		String nodepath="//QW//CPFXGC/@value";
 		String cpfxgc = XMLReader.getXMLNode(path, nodepath);
@@ -260,13 +260,13 @@ public class HyfjsExtractor {
 			node.addAttribute("value", "0");
 		}
 	}
-
+	
 	/**
 	 * 婚姻无效
 	 */
 	public static void hywx(String path,Document document,Element newroot) throws XPathExpressionException, ParserConfigurationException, SAXException, IOException{
-		Element root = document.getRootElement();
-		Element node = newroot.addElement("HYWX").addAttribute("nameCN", "是否属于无效婚姻");
+		Element root = document.getRootElement();  
+		Element node = newroot.addElement("ZYCC").addAttribute("nameCN", "是否属于无效婚姻");
 		String nodepath="//QW//CPFXGC/@value";
 		String cpfxgc = XMLReader.getXMLNode(path, nodepath);
 		boolean flag = false;
@@ -276,7 +276,6 @@ public class HyfjsExtractor {
 			for(String s:cpfxgcList){
 				if(SplitUtil.containsAll(s, sicknessWords)||StringUtil.contains(s, "旁系血亲")||StringUtil.contains(s, "婚姻无效")){
 					flag = true;
-					break;
 				}
 			}
 		}
@@ -286,13 +285,13 @@ public class HyfjsExtractor {
 			node.addAttribute("value", "0");
 		}
 	}
-
+	
 	/**
 	 * 共同还贷
 	 */
 	public static void gthd(String path,Document document,Element newroot) throws XPathExpressionException, ParserConfigurationException, SAXException, IOException{
-		Element root = document.getRootElement();
-		Element node = newroot.addElement("GTGD").addAttribute("nameCN", "是否属于无效婚姻");
+		Element root = document.getRootElement();  
+		Element node = newroot.addElement("GTHD").addAttribute("nameCN", "共同还贷");
 		String nodepath="//QW//CPFXGC/@value";
 		String cpfxgc = XMLReader.getXMLNode(path, nodepath);
 		boolean flag = false;
@@ -302,7 +301,6 @@ public class HyfjsExtractor {
 			for(String s:cpfxgcList){
 				if(SplitUtil.containsAll(s, keyWord)&&StringUtil.contains(s, "共同")){
 					flag = true;
-					break;
 				}
 			}
 		}
