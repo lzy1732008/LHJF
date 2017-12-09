@@ -64,7 +64,7 @@ public class YS {
 	}
 
 	/*
-	 * 涉及子女抚养教育
+	 * 涉及子女抚养教
 	 */
 	public static int row3(Document document, Element newroot) {
 		Element SFBGJBDTHZTTTNode = newroot.addElement("SJZNFYJY").addAttribute("nameCN", "涉及子女抚养教育");
@@ -76,7 +76,7 @@ public class YS {
 			String[] sentence = content.split("。|；");
 			for (String s : sentence) {
 				if (s.contains("子") || s.contains("女") || s.contains("男") || s.contains("女") || s.contains("孩")) {
-					res = 1;
+					
 					String[] ysFlag = {"教育", "抚养", "学业"};
 					System.out.println(s);
 					if (util.ifContainFlag(s, ysFlag)) {
@@ -211,10 +211,10 @@ public class YS {
 	}
 
 	/*
-	 * 中华人民共和国婚姻法第十八条:一方有伤残补助
+	 * 中华人民共和国婚姻法第十八条:一方因身体受到伤害获得的医疗费、残疾人生活补助费等费用；****************************
 	 */
 	public static int row9(Document document, Element newroot) {
-		Element SFBGJBDTHZTTTNode = newroot.addElement("YFYSCBZ").addAttribute("nameCN", "一方有伤残补助");
+		Element SFBGJBDTHZTTTNode = newroot.addElement("YFYLFCJRSHBZF").addAttribute("nameCN", "一方医疗费、残疾人生活补助费等费用");
 		int res = 0;
 		String content = util.getAJJBQKString(document);
 		if (content != null && !content.equals("")) {
@@ -225,6 +225,10 @@ public class YS {
 					res = 1;
 					break;
 				}
+				else if(s.contains("伤")&&s.contains("医疗费")) {
+					res = 1;
+					break;
+				}
 			}
 		}
 		SFBGJBDTHZTTTNode.addAttribute("value", res + "");
@@ -232,7 +236,7 @@ public class YS {
 	}
 
 	/*
-	 * 中华人民共和国婚姻法第十八条：是否有遗嘱或赠与合同中确定只归夫或妻一方的财产
+	 * 中华人民共和国婚姻法第十八条：是否有遗嘱或赠与合同中确定只归夫或妻一方的财产***********************************
 	 */
 	public static int row10(Document document, Element newroot) {
 		Element SFBGJBDTHZTTTNode = newroot.addElement("SFYYZHZYHTZQDZGFHQYFDCC").addAttribute("nameCN", "是否有遗嘱或赠与合同中确定只归夫或妻一方的财产");
@@ -241,7 +245,7 @@ public class YS {
 		if (content != null && !content.equals("")) {
 			String[] sentence = content.split("。|；|，");
 			for (String s : sentence) {
-				if (s.contains("遗嘱") || s.contains("赠与") || s.contains("遗赠")) {
+				if (s.contains("遗嘱") || s.contains("赠与") || s.contains("遗赠")||(s.contains("个人")&&s.contains("财产"))) {
 					System.out.println(s);
 					if (!s.contains("双方") && !s.contains("共同")) {
 						//System.out.print("双方"+s);
@@ -329,24 +333,29 @@ public class YS {
 	}
 
 	/*
-	 * 中华人民共和国婚姻法：第四十二条，离婚后一方生活困难
+	 * 中华人民共和国婚姻法：第四十二条，离婚后一方生活困难******************
 	 */
 	public static int row14(Document document, Element newroot) {
 		Element SFBGJBDTHZTTTNode = newroot.addElement("LHHYFSHKN").addAttribute("nameCN", "离婚后一方生活困难");
 		int res = 0;
 		String content = util.getAJJBQKString(document);
 		if (content != null && !content.equals("")) {
-			String[] sentence = content.split("。|；|，");
+			String[] sentence = content.split("。|；");
 			for (String s : sentence) {
-				if (s.contains("原告") || s.contains("被告")) {
+			
 					if (s.contains("生活")) {
 						//使用滑动窗口
-						String[] keypairs = {"生活;困难", "生活;艰难", "无法;生活"};
+						String[] keypairs = {"生活;困难", "生活;艰难", "无法;生活","保障;生活","生活;补助"};
 						if (util.windowForKey(s, keypairs, 8)) {
 							res = 1;
 							break;
 						}
-					}
+						if(s.contains("补偿")&&(s.contains("原告")||s.contains("被告"))) {
+							res  = 1;
+							break;
+						}
+						
+					
 
 				}
 			}
@@ -433,18 +442,18 @@ public class YS {
 	}
 
 	/*
-    中华人民共和国婚姻法第三十一条:双方自愿离婚
+    中华人民共和国婚姻法第三十一条:双方自愿离婚***************
      */
 	public static int row18(Document document, Element newroot) {
 		Element SFBGJBDTHZTTTNode = newroot.addElement("SFZYLH").addAttribute("nameCN", "双方自愿离婚");
 		int res = 0;
 		String content = util.getAJJBQKString(document);
 		if (content != null && !content.equals("")) {
-			String[] sentence = content.split("。|；|，");
+			String[] sentence = content.split("。|；");
 			for (String s : sentence) {
 				if (s.contains("离婚")) {
 					//	System.out.println(s);
-					if ((s.contains("自愿") || s.contains("同意")) && !s.contains("不同意") && !s.contains("不自愿")) {
+					if ((s.contains("自愿") || s.contains("同意")) ) {
 						//System.out.println(s);
 						res = 1;
 						break;
@@ -539,7 +548,7 @@ public class YS {
 	}
 
 	/*
-	涉及夫妻共同财产
+	涉及夫妻共同财产********************************添加上“家中财产”
 	 */
 	public static int row22(Document document, Element newroot) {
 		Element SFBGJBDTHZTTTNode = newroot.addElement("SJFQGTCC").addAttribute("nameCN", "涉及夫妻共同财产");
@@ -610,7 +619,7 @@ public class YS {
 	}
 
 	/*
-    有2周岁以下子女
+    有2周岁以下子女************************
      */
 	public static int row24(Document document, Element newroot) {
 		Element SFBGJBDTHZTTTNode = newroot.addElement("YLZSYXZN").addAttribute("nameCN", "有2周岁以下子女");
@@ -624,6 +633,10 @@ public class YS {
 					System.out.println("all" + s);
 					if ((s.contains("两周岁") || s.contains("两岁") || s.contains("2周岁") || s.contains("2岁")) && (s.contains("未满") && s.contains("不满") || s.contains("不足") || s.contains("未足") || s.contains("以下"))) {
 						//System.out.println(s);
+						res = 1;
+						break;
+					}
+					if(s.contains("一岁")||s.contains("一周岁")||s.contains("1岁")||s.contains("1周岁")||s.contains("未满周岁")||s.contains("哺乳期")){
 						res = 1;
 						break;
 					}
@@ -684,23 +697,35 @@ public class YS {
 	}
 
 	/*
-    婚后未建立起夫妻感情
+    婚后未建立起夫妻感情***************************
      */
 	public static int row27(Document document, Element newroot) {
-		Element SFBGJBDTHZTTTNode = newroot.addElement("HHWJLQFQGQ").addAttribute("nameCN", "婚后未建立起夫妻感情");
-		int res = 0;
-		System.out.println(document.getName());
-		String content = util.getAJJBQKString(document);
-		if (content != null && !content.equals("")) {
-			String[] sentence = content.split("；|。");
-			for (String s : sentence) {
-				if (((s.contains("未") || s.contains("不能") || s.contains("没有")) && s.contains("建立") && s.contains("夫妻感情"))) {
-					res = 1;
-					break;
-				}
-			}
-		}
-		SFBGJBDTHZTTTNode.addAttribute("value", res + "");
+	  int res = 0 ;
+	  Element root = document.getRootElement();
+  	  Element HQQFLJNode = newroot.addElement("HQQFLJ").addAttribute("nameCN", "是否存在婚前缺乏了解，草率结婚，婚后未建立起夫妻感情，难以共同生活的情形");
+        String JD ="否";
+        int flagq = 0;
+        int flagh = 0;
+  	  if(root.attribute("value")!=null){
+  		 String qwStr = root.attributeValue("value");
+  		 String[] qwStrarray = qwStr.split("，|。");
+  		 for(String qw:qwStrarray){   			
+  			 if((qw.contains("婚前")&&(qw.contains("缺乏")||qw.contains("缺少"))&&qw.contains("了解"))||qw.contains("草率结婚")){
+  				 System.out.println(qw);
+  				 flagq =1;    				 
+  			 }
+  			 if(((qw.contains("未")||qw.contains("不能")||qw.contains("没有"))&&qw.contains("建立")&&qw.contains("夫妻感情"))||
+  				((qw.contains("难以")||qw.contains("无法")||qw.contains("不能"))&&(qw.contains("共同生活")||qw.contains("与被告生活")||qw.contains("与原告生活")))){
+  				 flagh =1;   
+  				 System.out.println(qw);
+  		     }
+  	  }
+  		 if(flagq*flagh==1){
+  			 res = 1;
+  		 }
+       }
+  	  
+  	    HQQFLJNode.addAttribute("value", res+"");
 		return res;
 	}
 
@@ -728,7 +753,7 @@ public class YS {
 
 
 	/*
-    涉及赡养父母
+    涉及赡养父母*****************
      */
 	public static int row29(Document document, Element newroot) {
 		Element SFBGJBDTHZTTTNode = newroot.addElement("SYFM").addAttribute("nameCN", "赡养父母");
@@ -774,7 +799,7 @@ public class YS {
 	}
 
 	/*
-    家庭关系是否和睦
+    家庭关系是否和睦*************************建议删除
      */
 	public static int row31(Document document, Element newroot) {
 		Element SFBGJBDTHZTTTNode = newroot.addElement("JTGXSFHM").addAttribute("nameCN", "家庭关系是否和睦");
@@ -793,6 +818,9 @@ public class YS {
 						}
 					}
 				}
+				
+				
+				
 			}
 
 		}
@@ -821,7 +849,6 @@ public class YS {
 		SFBGJBDTHZTTTNode.addAttribute("value", res + "");
 		return res;
 	}
-
 
 
 
