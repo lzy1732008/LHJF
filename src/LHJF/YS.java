@@ -3,7 +3,7 @@ package LHJF;
 import org.dom4j.Document;
 import org.dom4j.Element;
 
-public class YS {
+public class YS {    
 	private static Util util = new Util();
 	/*
 	 * row3:被告拒不到庭或中途退庭
